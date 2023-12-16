@@ -19,7 +19,7 @@ function NotesItem(props) {
                        </div>
                         <hr/>
                         <p className="card-text"><i className="fa-solid fa-circle fa-2xs"></i> {note.description}</p>
-                        <p className="card-text"><i className="fa-solid fa-circle fa-2xs"></i> Test code: {note.tag}</p>
+                        {(note.tag)?<p className="card-text"><i className="fa-solid fa-circle fa-2xs"></i> {note.tag}</p>:''}
                         <p className="card-text"><i className="fa-solid fa-circle fa-2xs"></i> {note.date}</p>
                         {/* <button className='btn btn-primary' type='button'></button> */}
                     </div>

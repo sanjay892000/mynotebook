@@ -6,8 +6,8 @@ function AddNotes(props) {
     const { addNotes } = context;
     const [notes, setNotes] = useState({ title: "", description: "", tag: "" })
     const addBtnHandle = () => {
-        addNotes(notes.title,notes.description,notes.tag);
-        props.showAlerts('Successful Added Notes','success','Success');
+        addNotes(notes.title, notes.description, notes.tag);
+        props.showAlerts('Successful Added Notes', 'success', 'Success');
     }
     const onChange = (e) => {
         setNotes({ ...notes, [e.target.name]: e.target.value })
@@ -16,6 +16,7 @@ function AddNotes(props) {
 
         <>
             <div className='container'>
+                <h1 className='text-center text-primary mb-5'>Welcome to My Notebook</h1>
                 <h2>Add a Notes</h2>
                 <hr />
                 <form action="">
@@ -28,10 +29,10 @@ function AddNotes(props) {
                         <input type="text" className="form-control" id="description" name='description' onChange={onChange} />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="tag" className="form-label">Tag Name</label>
+                        <label htmlFor="tag" className="form-label">Tag Name(Optional)</label>
                         <input type="text" className="form-control" id="tag" name="tag" onChange={onChange} />
                     </div>
-                    <button className='btn btn-primary' type='button' onClick={addBtnHandle}>Add Note</button>
+                    {(notes.title && notes.description) ? <button className='btn btn-primary' type='button' onClick={addBtnHandle}>Add Note</button> : <button className='btn btn-primary' type='button' disabled>Add Note</button>}
                 </form>
                 <hr />
             </div>

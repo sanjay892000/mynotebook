@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const SignUp = (props) => {
   const navigate = useNavigate();
   const host = "http://localhost:5000";
-  const [credintials, setcredintials] = useState({ name: "", email: "", contact: "", password: "", repassword: "" });
+  const [credintials, setcredintials] = useState({ name: "", email: "", password: "", repassword: "" });
 
 
   const handleSubmit = async (e) => {
@@ -14,7 +14,7 @@ const SignUp = (props) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ name: credintials.name, emails: credintials.email, contact: credintials.contact, password: credintials.password }),
+      body: JSON.stringify({ name: credintials.name, emails: credintials.email, password: credintials.password }),
     });
     const note = await response.json()
     console.log(note);
@@ -43,18 +43,14 @@ const SignUp = (props) => {
           <input type="email" className="form-control" id="email" value={credintials.email} name='email' onChange={onChange} placeholder="name@example.com" required />
         </div>
         <div className="mb-3">
-          <label htmlFor="contact" className="form-label">Contact</label>
-          <input type="number" className="form-control" id="contact" value={credintials.contact} name='contact' onChange={onChange} placeholder="xxxxxxxxxx" minLength={10} maxLength={10} required />
-        </div>
-        <div className="mb-3">
           <label htmlFor="password" className="form-label">Password</label>
-          <input type="password" className="form-control" id="password" value={credintials.password} name='password' onChange={onChange} placeholder="must be greater than 8 character" minLength={8} required />
+          <input type="password" className="form-control" id="password" value={credintials.password} name='password' onChange={onChange} placeholder="Your password must be at least 8 characters long" minLength={8} required />
         </div>
         <div className="mb-3">
           <label htmlFor="repassword" className="form-label">Re-Password</label>
-          <input type="password" className="form-control" id="repassword" value={credintials.repassword} name='repassword' onChange={onChange} placeholder="Comform password" minLength={8} required />
+          <input type="password" className="form-control" id="repassword" value={credintials.repassword} name='repassword' onChange={onChange} placeholder="Comform your password" minLength={8} required />
         </div>
-        <button className='btn btn-primary' type='button' onClick={handleSubmit}>SignUp</button>
+      {(credintials.name && credintials.email && credintials.password && credintials.password.length>=8 && credintials.password===credintials.repassword)?<button className='btn btn-primary' type='button' onClick={handleSubmit}>SignUp</button>:<button className='btn btn-primary' type='button' disabled>SignUp</button>}
       </form>
     </div>
   )

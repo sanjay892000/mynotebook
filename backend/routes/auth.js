@@ -27,7 +27,7 @@ const JWT_SECRET = "sanjaysingh";
 router.post('/createuser', [
     body('name', 'enter name').notEmpty(), //use express validator name is not empty
     body('emails', 'enter a valid emails').isEmail(),
-    body('contact', 'enter a valid contact').isLength({ min: 10 }).isLength({ max: 10 }),
+    /* body('contact', 'enter a valid contact').isLength({ min: 10 }).isLength({ max: 10 }), */
     body('password', 'enter password atleast minimum 8 characters').isLength({ min: 8 })
 ], async (req, res) => {
     const errors = validationResult(req);
@@ -45,7 +45,7 @@ router.post('/createuser', [
         user = await User.create({
             name: req.body.name,
             emails: req.body.emails,
-            contact: req.body.contact,
+            /* contact: req.body.contact, */
             password: secpassword
         })
         const data = {

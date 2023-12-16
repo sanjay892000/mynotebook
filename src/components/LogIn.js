@@ -38,7 +38,7 @@ function LogIn(props) {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="passwords" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="passwords" placeholder="must be greater than 8 character" value={credentials.password} name='password' onChange={onChange} required/>
+                    <input type="password" className="form-control" id="passwords" placeholder="Enter password" value={credentials.password} name='password' onChange={onChange} required/>
                     <div id="emailHelp" className="form-text">We'll never share your password with anyone else.</div>
                 </div>
                 <button className='btn btn-primary' type='button' onClick={handleSubmit}>LogIn</button>
