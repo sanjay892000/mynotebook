@@ -33,7 +33,8 @@ const SignUp = (props) => {
 
   return (
     <div>
-      <form action="">
+      <h1 className='text-center text-primary mb-5'>Sign up</h1>
+      <form action="" className='container' style={{width:"80%"}}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">Your Name</label>
           <input type="text" className="form-control" id="name" value={credintials.name} name='name' onChange={onChange} placeholder="jony singh" required />
@@ -50,7 +51,7 @@ const SignUp = (props) => {
           <label htmlFor="repassword" className="form-label">Re-Password</label>
           <input type="password" className="form-control" id="repassword" value={credintials.repassword} name='repassword' onChange={onChange} placeholder="Comform your password" minLength={8} required />
         </div>
-      {(credintials.name && credintials.email && credintials.password && credintials.password.length>=8 && credintials.password===credintials.repassword)?<button className='btn btn-primary' type='button' onClick={handleSubmit}>SignUp</button>:<button className='btn btn-primary' type='button' disabled>SignUp</button>}
+      {(credintials.name && credintials.email && credintials.password && credintials.password.length>=8 && credintials.password===credintials.repassword)?<button className='btn btn-primary' type='button' onClick={handleSubmit}>SignUp</button>:<button className='btn btn-primary' type='button' style={{width:"100px"}} disabled>SignUp</button>}
       </form>
     </div>
   )

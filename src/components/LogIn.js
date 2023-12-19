@@ -31,7 +31,8 @@ function LogIn(props) {
     }
     return (
         <div>
-            <form>
+            <h1 className='text-center text-primary mb-5'>Log in</h1>
+            <form className='container' style={{width:"80%"}}>
                 <div className="mb-3">
                     <label htmlFor="emails" className="form-label">Email address</label>
                     <input type="email" className="form-control" id="emails" value={credentials.email} name='email' placeholder="name@example.com" onChange={onChange} aria-describedby="emailHelp" required/>
@@ -39,9 +40,9 @@ function LogIn(props) {
                 <div className="mb-3">
                     <label htmlFor="passwords" className="form-label">Password</label>
                     <input type="password" className="form-control" id="passwords" placeholder="Enter password" value={credentials.password} name='password' onChange={onChange} required/>
-                    <div id="emailHelp" className="form-text">We'll never share your password with anyone else.</div>
+                    <div id="emailHelp" className="form-text mb-3">We'll never share your password with anyone else.</div>
+                <button className='btn btn-primary ' type='button' style={{width:"100px"}} onClick={handleSubmit}>LogIn</button>
                 </div>
-                <button className='btn btn-primary' type='button' onClick={handleSubmit}>LogIn</button>
             </form>
         </div>
     )
