@@ -27,8 +27,8 @@ router.get('/getnotes', fetchallnotes, async (req, res) => {
 
 //Router 2: Add notes notes using: POST 'api/notes/addnotes' login required
 router.post('/addnotes', fetchallnotes, [
-    body('title', 'Please valid title (Your title should not be greater 25 character)').isLength({ max: 25}),
-    body('description', 'Please enter Description').isLength({ max: 100 })
+    body('title', 'Please valid title (Your title should not be greater 100 character)').isLength({ max: 100}),
+    body('description', 'Please enter Description').isLength({ max: 1000 })
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

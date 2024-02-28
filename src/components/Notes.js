@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import NotesContext from '../mynotes/NotesContext';
 import NotesItem from './NotesItem';
-import AddNotes from './AddNotes';
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Button } from '@mui/material';
 
 
 
@@ -40,7 +41,6 @@ function Notes(props) {
 
     return (
         <>
-            <AddNotes showAlerts={showAlerts}/>
             <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Launch demo modal
             </button>
@@ -75,9 +75,12 @@ function Notes(props) {
                     </div>
                 </div>
             </div>
-            <div className='row my-3'>
+            <div className="d-flex justify-content-start m-5">
+        <Button component={Link} to="/AddNotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Create New Note</Button>
+      </div>
+            <div className='row'>
                     <h3>Your Notes</h3>
-                <div className="container my-3 mx-3">
+                <div className="container my-3">
                     {Notes.length === 0 && 'No notes to display'}
                 </div>
                 {Notes.map((note) => {

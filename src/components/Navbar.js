@@ -23,24 +23,17 @@ const NavBar = (props) => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link className={`nav-link ${location.pathname === "/" ? "active" : ""}`} aria-current="page" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className={`nav-link ${location.pathname === "/About" ? "active" : ""}`} to="/About">About</Link>
-              </li>
-              <li className="nav-item">
-                <Link className={`nav-link ${location.pathname === "/Copntact" ? "active" : ""}`} to="/Contact">Contact Us</Link>
-              </li>
-              <li className="nav-item">
-                <Link className={`nav-link ${location.pathname === "/Help" ? "active" : ""}`} to="/Help">Help</Link>
+                <Link className={`nav-link ${location.pathname === "/About" ? "active" : ""}`} to="/About">About us</Link>
               </li>
             </ul>
             {!localStorage.getItem('token')?
             <form className="d-flex" role="search">
               <Link className="btn btn-outline-secondary mx-1" role="button" to="/LogIn">LogIn</Link>
-              <Link className="btn btn-outline-secondary mx-1" to="/SignUp" role="button">SignUp</Link>
             </form>:<Link className="btn btn-outline-secondary mx-1" onClick={handleLogOut} to='#' role="button">LogOut</Link>}
           </div>
         </div>

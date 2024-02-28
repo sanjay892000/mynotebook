@@ -1,5 +1,9 @@
 import React, { useContext, useState } from 'react'
 import NotesContext from '../mynotes/NotesContext';
+import { TextField,Button } from '@mui/material';
+import { Link } from "react-router-dom";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import TopBody from './TopBody';
 
 function AddNotes(props) {
     const context = useContext(NotesContext);
@@ -16,25 +20,28 @@ function AddNotes(props) {
 
         <>
             <div className='container'>
-                <h1 className='text-center text-primary mb-5'>Welcome to My Notebook</h1>
-                <h2>Add a Notes</h2>
-                <hr />
-                <form action="">
-                    <div className="mb-3">
-                        <label htmlFor="title" className="form-label">Note's Title Name</label>
-                        <input type="text" className="form-control" id="title" name='title' onChange={onChange} />
+                <Button className="mb-4" variant="text" color="secondary" startIcon={<ArrowBackIcon />} component={Link} to="/" style={{ textTransform: "none", fontFamily: "'Poppins', sans-serif" }}>Home</Button>
+                <TopBody />
+                <h2 style={{ fontWeight: "Bold" }}>Create new Note</h2>
+                <p className="mb-4">Add  a new note with your info / notes</p>
+                <form autoComplete="off" noValidate>
+                    <div className="title mb-4">
+                        <TextField
+                            color="secondary"
+                            label="Title" variant="outlined" name='title' value={notes.title} onChange={onChange} fullWidth />
                     </div>
-                    <div className="mb-3">
-                        <label htmlFor="description" className="form-label">Description</label>
-                        <input type="text" className="form-control" id="description" name='description' onChange={onChange} />
+                    <div className="description mb-4">
+                        <TextField
+                            color="secondary" label="Description" variant="outlined" name='description' value={notes.description} onChange={onChange} fullWidth />
                     </div>
-                    <div className="mb-3">
-                        <label htmlFor="tag" className="form-label">Tag Name(Optional)</label>
-                        <input type="text" className="form-control" id="tag" name="tag" onChange={onChange} />
+                    <div className="tags mb-4">
+                        <TextField
+                            color="secondary" label="Tags(optional)" variant="outlined" name='tag' value={notes.tag} onChange={onChange} fullWidth />
                     </div>
-                    {(notes.title && notes.description) ? <button className='btn btn-primary' type='button' onClick={addBtnHandle}>Add Note</button> : <button className='btn btn-primary' type='button' disabled>Add Note</button>}
+                    {(notes.title && notes.description) ? <Button component={Link} to="/AddNotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }} onClick={addBtnHandle}>Add Note</Button> : <Button component={Link} to="/AddNotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }} disabled>Add Note</Button>}
+
+                    <Button component={Link} to="/Notes" className='mx-5' variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Your Note</Button>
                 </form>
-                <hr />
             </div>
 
         </>
