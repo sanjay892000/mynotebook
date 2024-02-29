@@ -10,7 +10,6 @@ export default function Home(props) {
     <>
       <TopBody />
       <Notes showAlerts={showAlerts} />
-
     </>
   )
 }

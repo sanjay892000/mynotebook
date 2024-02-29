@@ -6,6 +6,7 @@ export default function NotesState(props) {
   const host = "http://localhost:5000";
   const myNotes = [];
   const [Notes, setNotes] = useState(myNotes);
+  const {showAlerts}=props;
 
   //fetch Notes
   const getNotes = async () => {
@@ -53,6 +54,7 @@ export default function NotesState(props) {
     console.log(json)
     const newNote = Notes.filter((note) => { return note._id !== id });
     setNotes(newNote);
+    showAlerts('Your note has been deleted', 'danger', 'Success');
   }
 
   //Edit Notes

@@ -18,8 +18,9 @@ const router = express.Router();
 
 //import fetchdata file
 const fetchdata= require('../middleware/fetchdata');
+require('dotenv').config();
 
-const JWT_SECRET = "sanjaysingh";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 //router.post is use to post the data on the server(for use to post methode)
 

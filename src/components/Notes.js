@@ -33,6 +33,7 @@ function Notes(props) {
     const handleClick = () => {
         editNotes(note.id, note.etitle, note.edescription, note.etag)
         refClose.current.click();
+        showAlerts('Your note has been updated', 'success', 'Success');
     }
 
     const onChange = (e) => {
