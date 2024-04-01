@@ -7,7 +7,6 @@ function NotesItem(props) {
     const { note, updateNotes } = props;
     const context = useContext(NotesContext);
     const { deleteNotes } = context;
-    console.log(note.file)
 
     return (
         <>

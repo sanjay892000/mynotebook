@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import NotesContext from '../mynotes/NotesContext';
 import { TextField, Button } from '@mui/material';
 import { Link } from "react-router-dom";
@@ -25,15 +25,15 @@ function AddNotes(props) {
     });
     const context = useContext(NotesContext);
     const { addNotes } = context;
-    const [notes, setNotes] = useState({ title: "", description: "", file: "", notetype: "private", tag: "" })
+    const file = useRef(null)
+    const [notes, setNotes] = useState({ title: "", description: "", tag: "" })
     const addBtnHandle = () => {
-        addNotes(notes.title, notes.description, notes.tag, notes.file, notes.notetype);
+        addNotes(notes.title, notes.description, notes.tag)
         props.showAlerts('Successful Added Notes', 'success', 'Success');
     }
     const onChange = (e) => {
         setNotes({ ...notes, [e.target.name]: e.target.value })
-        console.log(notes.notetype)
-        
+        console.log(file.current.files[0]);
     }
     return (
 
@@ -65,15 +65,16 @@ function AddNotes(props) {
                         startIcon={<CloudUploadIcon />}
                     >
                         Upload file
-                        <VisuallyHiddenInput type="file" />
+                        <VisuallyHiddenInput type="file" ref={file}/>
                     </Button>
+                    {/* <input type="file" ref={file} onChange={onChange}/> */}
                     <div>
                         <FormControl>
                             <RadioGroup
                                 aria-labelledby="demo-controlled-radio-buttons-group-label"
                                 name="notetype"
-                                value={notes.notetype}
-                                onChange={onChange}
+                            /* value={notes.notetype}
+                            onChange={onChange} */
                             >
                                 <FormControlLabel value="private" control={<Radio />} label="Private" />
                                 <FormControlLabel value="public" control={<Radio />} label="Public" />

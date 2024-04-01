@@ -24,7 +24,7 @@ export default function NotesState(props) {
   }
 
   //Add Notes
-  const addNotes = async (title, description, tag, file) => {
+  const addNotes = async (title, description, tag /* , file */) => {
     //API call to add data into database
     const response = await fetch(`${host}/api/notes/addnotes`, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -33,7 +33,7 @@ export default function NotesState(props) {
         "auth-token": localStorage.getItem('token')
         /* "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwMzEzZTMyY2JmOWQ4ODFlNTMzNmExIn0sImlhdCI6MTY5NDcwMDYyMX0._7zsjnlY9wNnD7Uam_l0W3NiI9yBMYQ6vTbwtjzC-jI" */
       },
-      body: JSON.stringify({ title, description, tag, file }),
+      body: JSON.stringify({ title, description, tag /* , file */ }),
     });
     const note = await response.json()
     setNotes(Notes.concat(note))

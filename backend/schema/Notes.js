@@ -19,9 +19,9 @@ const NotesSchema = new mongoose.Schema({  //'new mongoose.Schema' likho ya 'new
         type: String,
         default: "General"
     },
-    file: {
+    /* file: {
         type:String
-    }, // String is shorthand for {type: String
+    }, */ // String is shorthand for {type: String
     date: {
         type: Date,
         default: Date.now
