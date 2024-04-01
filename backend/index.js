@@ -1,6 +1,3 @@
-//inde.js is main file it means index.js handled by all file
-
-//first of all import all file , express etc
 const express = require('express');
 const connectToDatabase = require('./database');
 const app = express()

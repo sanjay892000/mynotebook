@@ -9,7 +9,7 @@ const NotesSchema = new mongoose.Schema({  //'new mongoose.Schema' likho ya 'new
     title: {
         type: String,
         required: true,
-        unique:true
+        unique: true
     }, // String is shorthand for {type: String}
     description: {
         type: String,
@@ -18,6 +18,9 @@ const NotesSchema = new mongoose.Schema({  //'new mongoose.Schema' likho ya 'new
     tag: {
         type: String,
         default: "General"
+    },
+    file: {
+        type:String
     }, // String is shorthand for {type: String
     date: {
         type: Date,

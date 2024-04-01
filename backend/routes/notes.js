@@ -8,6 +8,9 @@ const Notes = require('../schema/Notes');
 
 //impost fetchdata file
 const fetchallnotes = require('../middleware/fetchdata');
+const upload = require('../middleware/multer');
+/* const fs = require('fs');
+const path = require('path') */
 
 // import the express validator to enter the valid value by the user
 const { body, validationResult } = require('express-validator');
@@ -26,9 +29,9 @@ router.get('/getnotes', fetchallnotes, async (req, res) => {
 })
 
 //Router 2: Add notes notes using: POST 'api/notes/addnotes' login required
-router.post('/addnotes', fetchallnotes, [
-    body('title', 'Please valid title (Your title should not be greater 100 character)').isLength({ max: 100}),
-    body('description', 'Please enter Description').isLength({ max: 1000 })
+router.post('/addnotes', fetchallnotes, upload.single('file'), [
+    body('title', 'Please provide a valid title (Your title should not be greater than 100 characters)').isLength({ max: 100 }),
+    body('description', 'Please enter a Description').isLength({ max: 1000 })
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -37,7 +40,8 @@ router.post('/addnotes', fetchallnotes, [
     try {
 
         const { title, description, tag } = req.body;
-        const notes = new Notes({ title, description, tag, user: req.user.id });
+        const file = req.file.path
+        const notes = new Notes({ title, description, tag, file, user: req.user.id });
         const saveNotes = await notes.save();
         res.json(saveNotes);
     } catch (error) {
@@ -63,7 +67,7 @@ router.put('/updatenotes/:id', fetchallnotes, async (req, res) => {
     }
     try {
         notes = await Notes.findByIdAndUpdate(req.params.id, { $set: newNotes }, { new: true });
-    res.json(notes);
+        res.json(notes);
     } catch (error) {
         console.log(error.massage);
         return res.status(400).send("there are server error")
@@ -80,14 +84,14 @@ router.delete('/deletenotes/:id', fetchallnotes, async (req, res) => {
     if (notes.user.toString() !== req.user.id) {
         return res.status(401).send("NOT ALLOWED");
     }
-   try {
-    notes = await Notes.findByIdAndDelete(req.params.id);
-    res.json({"success":"this notes hasbeen deleted",notes:notes});
-    console.log(notes+"\nthis id:- "+req.params.id+" is deleted");
-   } catch (error) {
-    console.log(error.massage);
-    return res.status(400).send("there are server error")
-}
+    try {
+        notes = await Notes.findByIdAndDelete(req.params.id);
+        res.json({ "success": "this notes hasbeen deleted", notes: notes });
+        console.log(notes + "\nthis id:- " + req.params.id + " is deleted");
+    } catch (error) {
+        console.log(error.massage);
+        return res.status(400).send("there are server error")
+    }
 })
 
 module.exports = router;

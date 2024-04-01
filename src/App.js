@@ -16,39 +16,40 @@ import Alert from './components/Alert';
 import { useState } from 'react';
 import Footer from './components/Footer';
 import PageNotFound from './components/PageNotFound';
-/* import { Notes } from '@mui/icons-material'; */
-
+import PublicNotes from './components/PublicNotes';
 
 function App() {
   const [alerts, setAlerts] = useState(null);
-  const showAlerts = (massage, type,status) => {
+  const showAlerts = (massage, type, status) => {
     setAlerts({
-      massage:massage,
-      type:type,
-      status:status
+      massage: massage,
+      type: type,
+      status: status
     })
     setTimeout(() => {
       setAlerts(null);
     }, 2000);
   }
+
   return (
     <>
       <NotesState showAlerts={showAlerts}>
         <Router>
           <Navbar showAlerts={showAlerts}/>
-          <Alert alerts={alerts}/>
+          <Alert alerts={alerts} />
           <div className="container">
             <Routes>
               <Route path='/login' element={<LogIn showAlerts={showAlerts}/>} />
-              <Route path='/' element={<Home showAlerts={showAlerts}/>} />
-              <Route path='/addnotes' element={<AddNotes showAlerts={showAlerts}/>} />
-              <Route path='/notes' element={<Notes showAlerts={showAlerts}/>} />
+              <Route path='/' element={<Home showAlerts={showAlerts} />} />
+              <Route path='/addnotes' element={<AddNotes showAlerts={showAlerts} />} />
+              <Route path='/notes' element={<Notes showAlerts={showAlerts} />} />
+              <Route path='/publicnotes' element={<PublicNotes showAlerts={showAlerts} />} />
               <Route path='/about' element={<About />} />
-              <Route path='/signup' element={<SignUp showAlerts={showAlerts}/>} />
-              <Route path='*' element={<PageNotFound/>} />
-             </Routes>
+              <Route path='/signup' element={<SignUp showAlerts={showAlerts} />} />
+              <Route path='*' element={<PageNotFound />} />
+            </Routes>
           </div>
-          <Footer/>
+          <Footer />
         </Router>
       </NotesState>
     </>

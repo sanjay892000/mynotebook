@@ -2,9 +2,9 @@ import React from 'react'
 import '../styles/about.css';
 import { Link } from "react-router-dom";
 function Footer() {
-  return (
-    <div>
-      <footer>
+    return (
+        <div>
+            <footer>
                 <div className="content">
                     <div className="top">
                         <div className="logo-details">
@@ -36,7 +36,7 @@ function Footer() {
                             <li><Link to="/login">Sign-in</Link></li>
                             <li><Link to="/signup">Join Free</Link></li>
                         </ul>
-                        <ul className="box">
+                        <ul className="box top-category">
                             <li className="link_name">Top Categories</li>
                             <li><Link to="/c/61554bfe801949ad7b9be4ff">Tent Notes</Link></li>
                             <li><Link to="/c/61554c2753bcf306407cb1bd">RV and Van Notes</Link></li>
@@ -44,11 +44,13 @@ function Footer() {
                             <li><Link to="c/61554c63dfd6a37d71449b5c">Survivalist Notes</Link></li>
                         </ul>
                         <ul className="box input-box">
-                            <li className="link_name">About myNoteBook</li>
-                            <li style={{color: "#F7FFFF"}}>
-                            An online web platform where you can create, edit, upload, delete your notes/information privately and securely without any disturbancee
-                            </li>
-                            <li style={{color: "#F7FFFF", width:"200px"}}><Link to="https://sanjay892000.github.io/my-portfolio-web/">Created by Sanjay Kumar Singh</Link></li>
+                            <div className="aboutli">
+                                <li className="link_name">About myNoteBook</li>
+                                <li style={{ color: "#F7FFFF" }}>
+                                    An online web platform where you can create, edit, upload, delete your notes/information privately and securely without any disturbancee
+                                </li>
+                            </div>
+                            <li style={{ color: "#F7FFFF", width: "200px" }}><Link to="https://sanjay892000.github.io/my-portfolio-web/">Created by Sanjay Kumar Singh</Link></li>
                         </ul>
                     </div>
                 </div>
@@ -63,8 +65,8 @@ function Footer() {
                 </div>
             </footer>
 
-    </div>
-  )
+        </div>
+    )
 }
 
 export default Footer

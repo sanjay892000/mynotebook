@@ -1,7 +1,7 @@
 //import the express 
 const express = require('express');
 
-//import the user schems file 
+//import the user schemas file 
 const User = require('../schema/User');
 
 // import the express validator to enter the valid value by the user
@@ -38,7 +38,7 @@ router.post('/createuser', [
     try {
         let user = await User.findOne({ emails: req.body.emails });
         if (user) {
-            success=false;
+          const success=false;
             return res.status(400).json({success, errors: "sorry this user already exist with this emails" });
         }
         const salt = await bcrypt.genSalt(10); //return promise so use await ,
@@ -55,7 +55,7 @@ router.post('/createuser', [
             }
         }
         const auth_token = jwt.sign(data, JWT_SECRET);
-        success=true;
+      const  success=true;
         res.json({success, auth_token });
     } catch (error) {
         console.log(error.massage);
@@ -64,7 +64,7 @@ router.post('/createuser', [
 
 })
 //route:2 user login require using: post "api/auth/login" no logined required
-router.post('/login', [
+router.post('/loginuser', [
     body('emails', 'enter a valid emails').isEmail(),
     body('password', 'enter password atleast minimum 8 characters').exists()
 ], async (req, res) => {
@@ -78,13 +78,13 @@ router.post('/login', [
         let user = await User.findOne({ emails });
         console.log(user);
         if (!user) {
-            success=false;
+          const  success=false;
             return res.status(400).json({success, error: "Please try to login with correct credentials" });
         }
         const compPassword = await bcrypt.compare(password, user.password);
         console.log(compPassword);
         if (!compPassword) {
-            success=false;
+          const  success=false;
            return res.status(400).json({success, error: "Please try to login with correct credentials" })
         }
         const data = {
@@ -93,7 +93,7 @@ router.post('/login', [
             }
         }
         const auth_token = jwt.sign(data, JWT_SECRET);
-        success=true;
+      const  success=true;
         res.json({ success, auth_token });
     } catch (error) {
         console.log(error.massage);
@@ -102,7 +102,7 @@ router.post('/login', [
 })
 
 //route:3 get logedin user details using: post "api/auth/fetchdata" login required
-router.post('/fetchdata',fetchdata, async (req, res) => {
+router.post('/fetchuser',fetchdata, async (req, res) => {
     try {
         const user_id=req.user.id;
         const user=await User.findById(user_id).select("-password");

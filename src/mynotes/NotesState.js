@@ -6,7 +6,7 @@ export default function NotesState(props) {
   const host = "http://localhost:5000";
   const myNotes = [];
   const [Notes, setNotes] = useState(myNotes);
-  const {showAlerts}=props;
+  const { showAlerts } = props;
 
   //fetch Notes
   const getNotes = async () => {
@@ -22,18 +22,18 @@ export default function NotesState(props) {
     const json = await response.json();
     setNotes(json);
   }
-  
+
   //Add Notes
-  const addNotes = async (title, description, tag) => {
+  const addNotes = async (title, description, tag, file) => {
     //API call to add data into database
     const response = await fetch(`${host}/api/notes/addnotes`, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
-        "auth-token":localStorage.getItem('token')
+        "auth-token": localStorage.getItem('token')
         /* "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwMzEzZTMyY2JmOWQ4ODFlNTMzNmExIn0sImlhdCI6MTY5NDcwMDYyMX0._7zsjnlY9wNnD7Uam_l0W3NiI9yBMYQ6vTbwtjzC-jI" */
       },
-      body: JSON.stringify({ title, description, tag }),
+      body: JSON.stringify({ title, description, tag, file }),
     });
     const note = await response.json()
     setNotes(Notes.concat(note))
@@ -47,7 +47,7 @@ export default function NotesState(props) {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem('token')
         /* "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwMzEzZTMyY2JmOWQ4ODFlNTMzNmExIn0sImlhdCI6MTY5NDcwMDYyMX0._7zsjnlY9wNnD7Uam_l0W3NiI9yBMYQ6vTbwtjzC-jI" */
-     
+
       }
     });
     const json = await response.json();
@@ -65,7 +65,7 @@ export default function NotesState(props) {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem('token')
         /* "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwMzEzZTMyY2JmOWQ4ODFlNTMzNmExIn0sImlhdCI6MTY5NDcwMDYyMX0._7zsjnlY9wNnD7Uam_l0W3NiI9yBMYQ6vTbwtjzC-jI" */
-        
+
       },
       body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
     });
@@ -85,10 +85,9 @@ export default function NotesState(props) {
     setNotes(newNotes);
   }
 
-
   return (
     <div>
-      <NotesContext.Provider value={{ Notes, setNotes, addNotes, editNotes, deleteNotes, getNotes }}>
+      <NotesContext.Provider value={{ Notes, setNotes, addNotes, editNotes, deleteNotes, getNotes}}>
         {props.children}
       </NotesContext.Provider>
     </div>
