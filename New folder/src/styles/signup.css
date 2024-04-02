@@ -1,0 +1,25 @@
+.full-page{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.left-page{
+    width: 55vw;
+}
+
+
+@media (max-width: 770px){
+    .full-page{
+        display: flex;
+        flex-direction: column;
+    }
+    .right-page{
+        display: none;
+    }
+    .left-page{
+     width: 90vw;
+    }
+}

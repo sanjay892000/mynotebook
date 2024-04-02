@@ -1,0 +1,43 @@
+.user-box {
+    width: 250px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(219, 233, 254);
+}
+
+.user-icon {
+    width: 125px;
+    height: 125px;
+    margin-top: 15px;
+    border-radius: 50%;
+}
+
+.user-name{
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(123,31,162);
+    margin: 10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.user-icon img {
+    object-fit: cover;
+    width: 125px;
+    height: 125px;
+    overflow: auto;
+}
+.logout{
+    margin: 20px;
+    background-color: rgb(123,31,162);
+    color: white;
+    font-size: larger;
+    padding-bottom: 5px;
+    height: 40px;
+    width:120px;
+    border-radius: 5px;
+    border: none;
+}
+.logout:hover{
+    background-color: rgb(113, 25, 151);
+}
