@@ -8,7 +8,7 @@ const Notes = require('../schema/Notes');
 
 //impost fetchdata file
 const fetchallnotes = require('../middleware/fetchdata');
-const upload = require('../middleware/multer');
+/* const upload = require('../middleware/multer'); */
 /* const fs = require('fs');
 const path = require('path') */
 
