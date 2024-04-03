@@ -1,0 +1,19 @@
+.notescomponent {
+    object-fit:cover;
+    overflow:hidden;
+}
+.notescomponent img{
+    width: 290px;
+    height: 150px;
+}
+.notetag{
+    /* border: 2px solid rgb(173, 199, 237); */
+    margin-bottom: 5px;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.notedate{
+ font-size: 12px;
+ opacity: 0.7;
+}

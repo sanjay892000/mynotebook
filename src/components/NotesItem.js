@@ -1,12 +1,24 @@
 import React, { useContext } from 'react'
 import NotesContext from '../mynotes/NotesContext';
 import image from '../images/about.jpg'
+require('../styles/noteitems.css')
 
 
 function NotesItem(props) {
     const { note, updateNotes } = props;
     const context = useContext(NotesContext);
     const { deleteNotes } = context;
+    const tagtext = note.tag
+    const tagname = tagtext.toUpperCase();
+    const title = note.title
+    const ftitle = title.charAt(0);
+    const uptitle = ftitle.toUpperCase();
+    const remtitle = title.slice(1)
+    const titlename = uptitle + remtitle;
+    /* const rtag = tagtext.slice(1);
+    const tagname = uper + rtag; */
+
+
 
     return (
         <>
@@ -16,16 +28,15 @@ function NotesItem(props) {
                 <div className="card my-3 bg-info-subtle">
                     <div className="card-body ">
                         <div className="d-flex align-items-center justify-content-center">
-                            <h6 className="card-title">{note.title}</h6>
+                            <h6 className="card-title">{titlename}</h6>
                         </div>
                         <hr />
                         <div className='notescomponent'>
-                            <p className="card-text"><i className="fa-solid fa-circle fa-2xs"></i> {note.description}</p>
-                            {(note.tag) ? <p className="card-text"><i className="fa-solid fa-circle fa-2xs"></i> {note.tag}</p> : ''}
-                            <p className="card-text mt-3"><i className="fa-solid fa-circle fa-2xs"></i> {note.date}</p>
-                            <img src={image} alt="Loading..." style={{width:'290px', height:"150px" , objectFit:'cover'}} />
+                            <p className="card-text">{note.description}</p>
+                            {(tagname) ? <p><spam className="card-text notetag">#{tagname}</spam></p> : ''}
+                            <img src={image} alt="Loading..."/>
+                            <p className="card-text mt-3 font-size-sm notedate">{note.date}</p>
                         </div>
-
                     </div>
                 </div>
                 </div>
