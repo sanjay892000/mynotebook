@@ -6,12 +6,13 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import { Link, useNavigate } from "react-router-dom";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { BaseUrl } from '../Urls';
 
 function LogIn(props) {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     /* const [login, setlogin] = useState(true) */
-    const host = "http://localhost:5000";
+    const host = {BaseUrl};
     const [credentials, setCredentials] = useState({ email: "", password: "" });
 
 
@@ -53,7 +54,6 @@ function LogIn(props) {
         }; */
 
     return (
-        <>
             <div className="full-page">
                 <div className="container addnotes mb-5" >
                     <h2 style={{ fontWeight: "Bold" }}>Welcom to myNoteBook</h2>
@@ -100,7 +100,6 @@ function LogIn(props) {
                     </div>
                 </div>
             </div>
-            </>
     )
 }
 

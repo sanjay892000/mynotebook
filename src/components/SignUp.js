@@ -5,10 +5,11 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import avataars from "../images/avataaars.png";
 import '../styles/signup.css'
+import { BaseUrl } from '../Urls';
 
 const SignUp = (props) => {
   const navigate = useNavigate();
-  const host = "http://localhost:5000";
+  const host = {BaseUrl};
   const [credintials, setcredintials] = useState({ name: "", email: "", password: "", repassword: "" });
 
   const [showPassword, setShowPassword] = useState(false)

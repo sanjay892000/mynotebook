@@ -8,9 +8,6 @@ const Notes = require('../schema/Notes');
 
 //impost fetchdata file
 const fetchallnotes = require('../middleware/fetchdata');
-/* const upload = require('../middleware/multer'); */
-/* const fs = require('fs');
-const path = require('path') */
 
 // import the express validator to enter the valid value by the user
 const { body, validationResult } = require('express-validator');
@@ -29,7 +26,7 @@ router.get('/getnotes', fetchallnotes, async (req, res) => {
 })
 
 //Router 2: Add notes notes using: POST 'api/notes/addnotes' login required
-router.post('/addnotes', fetchallnotes, /* upload.single('file'), */ [
+router.post('/addnotes', fetchallnotes, [
     body('title', 'Please provide a valid title (Your title should not be greater than 100 characters)').isLength({ max: 100 }),
     body('description', 'Please enter a Description').isLength({ max: 1000 })
 ], async (req, res) => {
@@ -40,8 +37,7 @@ router.post('/addnotes', fetchallnotes, /* upload.single('file'), */ [
     try {
 
         const { title, description, tag } = req.body;
-        /* const file = req.file.path */
-        const notes = new Notes({ title, description, tag, /* file, */ user: req.user.id });
+        const notes = new Notes({ title, description, tag, user: req.user.id });
         const saveNotes = await notes.save();
         res.json(saveNotes);
     } catch (error) {

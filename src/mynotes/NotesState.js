@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import NotesContext from './NotesContext';
+import { BaseUrl } from '../Urls';
 
 
 export default function NotesState(props) {
-  const host = "http://localhost:5000";
   const myNotes = [];
   const [Notes, setNotes] = useState(myNotes);
   const { showAlerts } = props;
@@ -11,7 +11,7 @@ export default function NotesState(props) {
   //fetch Notes
   const getNotes = async () => {
     //api call
-    const response = await fetch(`${host}/api/notes/getnotes`, {
+    const response = await fetch(`${BaseUrl}/api/notes/getnotes`, {
       method: "GET", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export default function NotesState(props) {
   //Add Notes
   const addNotes = async (title, description, tag /* , file */) => {
     //API call to add data into database
-    const response = await fetch(`${host}/api/notes/addnotes`, {
+    const response = await fetch(`${BaseUrl}/api/notes/addnotes`, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export default function NotesState(props) {
 
   //Delete Notes
   const deleteNotes = async (id) => {
-    const response = await fetch(`${host}/api/notes/deletenotes/${id}`, {
+    const response = await fetch(`${BaseUrl}/api/notes/deletenotes/${id}`, {
       method: "DELETE", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export default function NotesState(props) {
 
   //Edit Notes
   const editNotes = async (id, title, description, tag) => {
-    const response = await fetch(`${host}/api/notes/updatenotes/${id}`, {
+    const response = await fetch(`${BaseUrl}/api/notes/updatenotes/${id}`, {
       method: "PUt", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
