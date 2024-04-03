@@ -9,7 +9,6 @@ import { BaseUrl } from '../Urls';
 
 const SignUp = (props) => {
   const navigate = useNavigate();
-  const host = {BaseUrl};
   const [credintials, setcredintials] = useState({ name: "", email: "", password: "", repassword: "" });
 
   const [showPassword, setShowPassword] = useState(false)
@@ -25,7 +24,7 @@ const SignUp = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch(`${host}/api/auth/createuser`, {
+    const response = await fetch(`${BaseUrl}/api/auth/createuser`, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json"

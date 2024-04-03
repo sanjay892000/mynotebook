@@ -11,14 +11,12 @@ import { BaseUrl } from '../Urls';
 function LogIn(props) {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
-    /* const [login, setlogin] = useState(true) */
-    const host = {BaseUrl};
     const [credentials, setCredentials] = useState({ email: "", password: "" });
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`${host}/api/auth/loginuser`, {
+        const response = await fetch(`${BaseUrl}/api/auth/loginuser`, {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
                 "Content-Type": "application/json"
