@@ -1,0 +1,16 @@
+.notes-button {
+    height: auto;
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+@media (max-width: 500px) {
+    .notes-button {
+        flex-direction: column;
+        justify-content: space-between;
+        height: 25vh;
+        width: 99%;
+    }
+}

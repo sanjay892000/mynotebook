@@ -10,6 +10,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import { styled } from '@mui/material/styles'
 import TopBody from './TopBody';
+require('../styles/addnotes.css')
 
 function AddNotes(props) {
     const VisuallyHiddenInput = styled('input')({
@@ -81,10 +82,11 @@ function AddNotes(props) {
                             </RadioGroup>
                         </FormControl>
                     </div>
-                    <br />
+                    <div className='notes-button mt-4'>
                     {(notes.title && notes.description) ? <Button component={Link} to="/addnotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }} onClick={addBtnHandle}>Add Note</Button> : <Button component={Link} to="/AddNotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }} disabled>Add Note</Button>}
 
-                    <Button component={Link} to="/notes" className='mx-5' variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Your Notes</Button>
+                    <Button component={Link} to="/notes" className='' variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Your Notes</Button>
+                    </div>
                 </form>
             </div>
 

@@ -6,11 +6,11 @@ import Drawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
 import '../styles/userdetails.css'
 import usericon from '../images/usericon.png'
+import { BaseUrl } from '../Urls';
 
 
 
 const NavBar = (props) => {
-  const host = "http://localhost:5000";
   const navigate = useNavigate();
   const [user, setUser] = useState([]);
 
@@ -28,7 +28,7 @@ const NavBar = (props) => {
 
   const fetchUser = async (e) => {
     //api call
-    const response = await fetch(`${host}/api/auth/fetchuser`, {
+    const response = await fetch(`${BaseUrl}/api/auth/fetchuser`, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
@@ -77,10 +77,10 @@ const NavBar = (props) => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li className="nav-item">
+              <li className="nav-item mx-1">
                 <Link className={`nav-link ${location.pathname === "/" ? "active" : ""} fs-5`} aria-current="page" to="/">Home</Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item mx-1">
                 <Link className={`nav-link ${location.pathname === "/about" ? "active" : ""} fs-5`} to="/about">About us</Link>
               </li>
             </ul>
@@ -97,7 +97,7 @@ const NavBar = (props) => {
                   </Drawer>
                 </React.Fragment>
               ))}</div> : <form className="d-flex" role="search">
-                <Link className="btn btn-outline-secondary mx-3" role="button" to="/login">LogIn</Link>
+                <Link className="btn btn-outline-secondary mx-1" role="button" to="/login">LogIn</Link>
               </form>}
           </div>
         </div>
