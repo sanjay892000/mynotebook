@@ -1,15 +1,15 @@
 const express = require('express');
 const connectToDatabase = require('./database');
 require('dotenv').config();
-const app = express()
-const port = process.env.PORT_BACK || 5000 
 const cors = require('cors')
+const port = process.env.PORT_BACK || 5000 
+const app = express()
 
+app.use(express.json());
 app.use(cors())
 //call the database through client()
 connectToDatabase();
 
-app.use(express.json());
 app.get('/', (req, res) => {
   try {
     res.status(200).json({ msg: "I am in home route" });
@@ -19,8 +19,8 @@ app.get('/', (req, res) => {
 });
 app.use(express.static("uploads"))
 app.use(express.static("Images"))
-
 app.use("/api/image", require("./routes/image"))
+
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));
 app.listen(port, () => {

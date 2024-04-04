@@ -1,11 +1,9 @@
 const express = require("express")
 const { ImageModel } = require("../schema/Image")
-const upload = require('../middleware/multer');
-const path = require('path');
 const fetchallimage = require('../middleware/fetchdata');
-
 const router = express.Router()
-
+const path = require('path');
+const upload = require('../middleware/multer');
 
 router.post("/uploadimage", fetchallimage, upload.single('image')  ,async(req, res)=>{
     const {name} = req.body

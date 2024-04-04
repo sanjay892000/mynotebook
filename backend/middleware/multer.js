@@ -1,23 +1,26 @@
 const multer = require("multer");
 const path = require('path');
 
-/* 
+
 //configure how the files are stored
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     //where to store the file
-    cb(null, "./Images/");
+    cb(null, "./uploads/");
   },
   filename: function (req, file, cb) {
     let ext = path.extname(file.originalname)
-    cb(null, file.fieldname + "-" + Date.now() + ext);
+    cb(null, file.fieldname + Date.now() + ext);
   },
 });
 
 
 
-const upload = multer({
-  storage: storage,
+const upload = multer({storage: storage});
+
+module.exports = upload;
+
+/* 
   fileFilter: function (req, file, cb) {
     //reject a file if it's not a jpg or png
     if (
@@ -31,21 +34,4 @@ const upload = multer({
   },
   limits: {
     fileSize: 1024 * 1024 * 5,
-  },
-});
-*/
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './Images/')
-  },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file.fieldname + '-' + uniqueSuffix  + path.extname(file.originalname))
-  }
-})
-
-const upload = multer({ storage: storage })
-
-module.exports = upload;
-
+  }, */

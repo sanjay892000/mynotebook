@@ -19,14 +19,17 @@ const NotesSchema = new mongoose.Schema({  //'new mongoose.Schema' likho ya 'new
         type: String,
         default: "General"
     },
-    /* file: {
-        type:String
-    }, */ // String is shorthand for {type: String
+    image: {
+        type: String
+    },
     date: {
         type: Date,
         default: Date.now
-    },
+    }
 
+},
+    {
+        versionKey: false
 });
 
 module.exports = mongoose.model("notes", NotesSchema);

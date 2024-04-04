@@ -1,32 +1,14 @@
 const express = require('express');
-
-//import router
 const router = express.Router();
-
-//import notes file
-const Notes = require('../schema/Notes');
-
-//impost fetchdata file
+const NotesSchema = require('../schema/Notes');
 const fetchallnotes = require('../middleware/fetchdata');
 
 // import the express validator to enter the valid value by the user
 const { body, validationResult } = require('express-validator');
+const upload = require('../middleware/multer');
 
-
-//Router 1: Get all notes using: GET 'api/notes/getnates' login required
-router.get('/getnotes', fetchallnotes, async (req, res) => {
-    try {
-        const notes = await Notes.find({ user: req.user.id });
-        res.json(notes);
-    } catch (error) {
-        console.log(error.massage);
-        return res.status(400).send("there are server error")
-    }
-
-})
-
-//Router 2: Add notes notes using: POST 'api/notes/addnotes' login required
-router.post('/addnotes', fetchallnotes, [
+//Router 1: Add notes notes using: POST 'api/notes/addnotes' login required
+router.post('/addnotes', fetchallnotes, upload.single("image"), [
     body('title', 'Please provide a valid title (Your title should not be greater than 100 characters)').isLength({ max: 100 }),
     body('description', 'Please enter a Description').isLength({ max: 1000 })
 ], async (req, res) => {
@@ -35,17 +17,36 @@ router.post('/addnotes', fetchallnotes, [
         return res.status(400).json({ errors: errors.array() })
     }
     try {
-
+        const image = req.file ? req.file.filename : null;
         const { title, description, tag } = req.body;
-        const notes = new Notes({ title, description, tag, user: req.user.id });
+        console.log(req.file)
+        const notes = new NotesSchema({
+            title,
+            description,
+            tag,
+            image,
+            user: req.user.id
+        });
         const saveNotes = await notes.save();
         res.json(saveNotes);
+        res.status(200).json({ msg: "New note added", success: true });
+    } catch (error) {
+        res.status(500).json({ msg: "Unabe to add note", success: false, error: error.message });
+    }
+})
+
+//Router 2: Get all notes using: GET 'api/notes/getnates' login required
+router.get('/getnotes', fetchallnotes, async (req, res) => {
+    try {
+        const notes = await NotesSchema.find({ user: req.user.id });
+        res.json(notes);
     } catch (error) {
         console.log(error.massage);
         return res.status(400).send("there are server error")
     }
 
 })
+
 //Route 3: Update notes using: PUT 'api/notes/updatenotes' login required
 router.put('/updatenotes/:id', fetchallnotes, async (req, res) => {
     const { title, description, tag } = req.body;
@@ -54,7 +55,7 @@ router.put('/updatenotes/:id', fetchallnotes, async (req, res) => {
     if (description) { newNotes.description = description; };
     if (tag) { newNotes.tag = tag; };
 
-    let notes = await Notes.findById(req.params.id);
+    let notes = await NotesSchema.findById(req.params.id);
     if (!notes) {
         return res.status(404).send("NOT FOUND");
     }
@@ -62,7 +63,7 @@ router.put('/updatenotes/:id', fetchallnotes, async (req, res) => {
         return res.status(401).send("NOT ALLOWED");
     }
     try {
-        notes = await Notes.findByIdAndUpdate(req.params.id, { $set: newNotes }, { new: true });
+        notes = await NotesSchema.findByIdAndUpdate(req.params.id, { $set: newNotes }, { new: true });
         res.json(notes);
     } catch (error) {
         console.log(error.massage);
@@ -73,7 +74,7 @@ router.put('/updatenotes/:id', fetchallnotes, async (req, res) => {
 //Route 4: Delete notes using: DELETE 'api/notes/deletenotes' login required
 router.delete('/deletenotes/:id', fetchallnotes, async (req, res) => {
 
-    let notes = await Notes.findById(req.params.id);
+    let notes = await NotesSchema.findById(req.params.id);
     if (!notes) {
         return res.status(404).send("NOT FOUND");
     }
@@ -81,7 +82,7 @@ router.delete('/deletenotes/:id', fetchallnotes, async (req, res) => {
         return res.status(401).send("NOT ALLOWED");
     }
     try {
-        notes = await Notes.findByIdAndDelete(req.params.id);
+        notes = await NotesSchema.findByIdAndDelete(req.params.id);
         res.json({ "success": "this notes hasbeen deleted", notes: notes });
         console.log(notes + "\nthis id:- " + req.params.id + " is deleted");
     } catch (error) {
