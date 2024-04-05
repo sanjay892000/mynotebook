@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const NotesSchema = require('../schema/Notes');
 const fetchallnotes = require('../middleware/fetchdata');
+const cors = require('cors');
+
+const app = express();
+
+app.use(cors());
 
 // import the express validator to enter the valid value by the user
 const { body, validationResult } = require('express-validator');
@@ -16,15 +21,18 @@ router.post('/addnotes', fetchallnotes, upload.single("image"), [
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() })
     }
+    console.log(req.body,"backend")
     try {
+       
         const image = req.file ? req.file.filename : null;
-        const { title, description, tag } = req.body;
-        console.log(req.file)
+        const { title, description, tag, type } = req.body;
+        const parsedType = type ? JSON.parse(type) : false;
         const notes = new NotesSchema({
             title,
             description,
             tag,
             image,
+            type:parsedType,
             user: req.user.id
         });
         const saveNotes = await notes.save();

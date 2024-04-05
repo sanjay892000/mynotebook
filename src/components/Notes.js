@@ -18,26 +18,26 @@ function Notes(props) {
             getNotes();
         }
         else{
-            navigate("/LogIn");
+            navigate("/login");
         }
         // eslint-disable-next-line
     })
     const ref = useRef(null)
     const refClose = useRef(null)
-    const [note, setNotes] = useState({ id: "", etitle: "", edescription: "", etag: "" })
+    const [updatenote, setupdateNotes] = useState({ id: "", etitle: "", edescription: "", etag: ""})
 
     const updateNotes = (currentNote) => {
         ref.current.click();
-        setNotes({ id: currentNote._id, etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag })
+        setupdateNotes({ id: currentNote._id, etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag})
     }
     const handleClick = () => {
-        editNotes(note.id, note.etitle, note.edescription, note.etag)
+        editNotes(updatenote.id, updatenote.etitle, updatenote.edescription, updatenote.etag)
         refClose.current.click();
         showAlerts('Your note has been updated', 'success', 'Success');
     }
 
     const onChange = (e) => {
-        setNotes({ ...note, [e.target.name]: e.target.value })
+        setupdateNotes({ ...updatenote, [e.target.name]: e.target.value })
     }
 
     return (
@@ -56,22 +56,25 @@ function Notes(props) {
                             <form className="my-3">
                                 <div className="mb-3">
                                     <label htmlFor="title" className="form-label">Title</label>
-                                    <input type="text" className="form-control" id="etitle" name="etitle" value={note.etitle} aria-describedby="emailHelp" onChange={onChange} minLength={5} required />
+                                    <input type="text" className="form-control" id="etitle" name="etitle" value={updatenote.etitle} aria-describedby="emailHelp" onChange={onChange} minLength={5} required />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="description" className="form-label">Description</label>
-                                    <input type="text" className="form-control" id="edescription" name="edescription" value={note.edescription} onChange={onChange} minLength={5} required />
+                                    <input type="text" className="form-control" id="edescription" name="edescription" value={updatenote.edescription} onChange={onChange} minLength={5} required />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="tag" className="form-label">Tag</label>
-                                    <input type="text" className="form-control" id="etag" name="etag" value={note.etag} onChange={onChange} />
+                                    <input type="text" className="form-control" id="etag" name="etag" value={updatenote.etag} onChange={onChange} />
                                 </div>
-
+                                {/* <div className="mb-3">
+                                    <label htmlFor="image" className="form-label">Image</label>
+                                    <input type="file" className="form-control" id="eimage" name="eimage"/>
+                                </div> */}
                             </form>
                         </div>
                         <div className="modal-footer">
                             <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button disabled={note.etitle.length < 5 || note.edescription.length < 5} onClick={handleClick} type="button" className="btn btn-primary">Update Note</button>
+                            <button disabled={updatenote.etitle.length < 5 || updatenote.edescription.length < 5} onClick={handleClick} type="button" className="btn btn-primary">Update Note</button>
                         </div>
                     </div>
                 </div>

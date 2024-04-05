@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import NotesContext from './NotesContext';
 import { BaseUrl } from '../Urls';
+import axios from 'axios';
 
 
 export default function NotesState(props) {
@@ -19,24 +20,47 @@ export default function NotesState(props) {
         /* "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwMzEzZTMyY2JmOWQ4ODFlNTMzNmExIn0sImlhdCI6MTY5NDcwMDYyMX0._7zsjnlY9wNnD7Uam_l0W3NiI9yBMYQ6vTbwtjzC-jI" */
       }
     });
-    const json = await response.json();
-    setNotes(json);
+    const fetchNotes = await response.json();
+    setNotes(fetchNotes);
   }
 
   //Add Notes
-  const addNotes = async (title, description, tag /* , file */) => {
+  const addNotes = async (title, description, tag, type, image) => {
+    const formData = new FormData();
+    formData.append('title', title)
+    formData.append('description', description)
+    formData.append('tag', tag)
+    formData.append('type', type)
+    formData.append('image', image)
     //API call to add data into database
-    const response = await fetch(`${BaseUrl}/api/notes/addnotes`, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
+    /* const response = await fetch(`${BaseUrl}/api/notes/addnotes`, {
+      method: "POST",
+     
+      // GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem('token')
-        /* "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwMzEzZTMyY2JmOWQ4ODFlNTMzNmExIn0sImlhdCI6MTY5NDcwMDYyMX0._7zsjnlY9wNnD7Uam_l0W3NiI9yBMYQ6vTbwtjzC-jI" */
       },
-      body: JSON.stringify({ title, description, tag /* , file */ }),
+      body: JSON.stringify({ title, description, tag, type, image }),
     });
     const note = await response.json()
-    setNotes(Notes.concat(note))
+    setNotes(Notes.concat(note)) */
+
+    await axios.post('http://localhost:5000/api/notes/addnotes', formData, {
+      headers: {
+        "Content-Type": "application/json",
+        "auth-token": localStorage.getItem('token')
+      }
+    })
+      .then((res) => {
+        const note = res.data;
+        setNotes(Notes.concat(note))
+        showAlerts('Your note has been deleted', 'danger', 'Success');
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
   }
 
   //Delete Notes
@@ -87,7 +111,7 @@ export default function NotesState(props) {
 
   return (
     <div>
-      <NotesContext.Provider value={{ Notes, setNotes, addNotes, editNotes, deleteNotes, getNotes}}>
+      <NotesContext.Provider value={{ Notes, setNotes, addNotes, editNotes, deleteNotes, getNotes }}>
         {props.children}
       </NotesContext.Provider>
     </div>

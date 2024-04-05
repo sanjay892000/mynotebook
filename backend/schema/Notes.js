@@ -22,6 +22,11 @@ const NotesSchema = new mongoose.Schema({  //'new mongoose.Schema' likho ya 'new
     image: {
         type: String
     },
+    type:{
+        type:Boolean, 
+        required:true, 
+        default:false
+    },
     date: {
         type: Date,
         default: Date.now

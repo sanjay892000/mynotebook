@@ -1,10 +1,11 @@
 .notescomponent {
-    object-fit:cover;
     overflow:hidden;
+    width: 290px;
 }
 .notescomponent img{
     width: 290px;
-    height: 150px;
+    height: 250px;
+    object-fit:cover;
 }
 .notetag{
     /* border: 2px solid rgb(173, 199, 237); */
