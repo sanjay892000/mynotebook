@@ -19,7 +19,7 @@ function NotesItem(props) {
 
     return (
         <>
-            <div className="main-card-style col-md-4 rounded-3 mt-3">
+            <div className="col-md-4 rounded-3 mt-3">
                 <div className='d-flex flex-column justify-content-center rounded-3 bg-primary-subtle px-3'>
                     <div className='d-flex justify-content-between align-item-center'>
                         <spam className={`pt-3 text-danger`}>{notetype}</spam>
