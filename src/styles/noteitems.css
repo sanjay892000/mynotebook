@@ -1,10 +1,26 @@
+.main-card-style{
+
+}
+
+@media  screen and (max-width: 768px) {
+    .main-card-style {
+        
+    }
+}
+.bg-primary-subtle{
+    /* width: 27vw; */
+}
+@media  screen and (max-width: 390px) {
+    .bg-primary-subtle{
+        width: 100%;
+    }
+}
 .notescomponent {
     overflow:hidden;
-    width: 290px;
 }
 .notescomponent img{
-    width: 290px;
-    height: 250px;
+    width: 100%;
+    height: auto;
     object-fit:cover;
 }
 .notetag{
