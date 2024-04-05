@@ -52,7 +52,8 @@ function LogIn(props) {
         }; */
 
     return (
-            <div className="full-page">
+        <div className="full-page">
+            <div className="full-login">
                 <div className="container addnotes mb-5" >
                     <h2 style={{ fontWeight: "Bold" }}>Welcom to myNoteBook</h2>
                 </div>
@@ -98,6 +99,7 @@ function LogIn(props) {
                     </div>
                 </div>
             </div>
+        </div>
     )
 }
 

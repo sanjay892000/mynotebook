@@ -71,8 +71,8 @@ function AddNotes(props) {
                                 value={notes.type}
                                 onChange={onChange}
                             >
-                                <FormControlLabel  value="false" control={<Radio />} label="Private" />
-                                <FormControlLabel  value="true" control={<Radio />} label="Public" />
+                                <FormControlLabel value="false" control={<Radio />} label="Private" />
+                                <FormControlLabel value="true" control={<Radio />} label="Public" />
                             </RadioGroup>
                         </FormControl>
                     </div>

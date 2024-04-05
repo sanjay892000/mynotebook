@@ -8,27 +8,27 @@ import { Button } from '@mui/material';
 
 
 function Notes(props) {
-    const {showAlerts}=props;
+    const { showAlerts } = props;
     const context = useContext(NotesContext);
     const { Notes, getNotes, editNotes } = context;
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(localStorage.getItem('token')){
+        if (localStorage.getItem('token')) {
             getNotes();
         }
-        else{
+        else {
             navigate("/login");
         }
         // eslint-disable-next-line
     })
     const ref = useRef(null)
     const refClose = useRef(null)
-    const [updatenote, setupdateNotes] = useState({ id: "", etitle: "", edescription: "", etag: ""})
+    const [updatenote, setupdateNotes] = useState({ id: "", etitle: "", edescription: "", etag: "" })
 
     const updateNotes = (currentNote) => {
         ref.current.click();
-        setupdateNotes({ id: currentNote._id, etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag})
+        setupdateNotes({ id: currentNote._id, etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag })
     }
     const handleClick = () => {
         editNotes(updatenote.id, updatenote.etitle, updatenote.edescription, updatenote.etag)
@@ -80,16 +80,16 @@ function Notes(props) {
                 </div>
             </div>
             <div className="d-flex justify-content-start m-5">
-        <Button component={Link} to="/AddNotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Create New Note</Button>
-      </div>
+                <Button component={Link} to="/AddNotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Create New Note</Button>
+            </div>
             <div className='row'>
-                    <h3>Your Notes</h3>
+                <h3>Your Notes</h3>
                 <div className="container my-3">
                     {Notes.length === 0 && 'No notes to display'}
                 </div>
                 {Notes.map((note) => {
                     return <>
-                        <NotesItem key={note.id} note={note} updateNotes={updateNotes} showAlerts={showAlerts}/>
+                        <NotesItem key={note.id} note={note} updateNotes={updateNotes} showAlerts={showAlerts} />
                     </>
                 })}
             </div>

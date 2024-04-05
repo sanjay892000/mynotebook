@@ -35,11 +35,11 @@ function App() {
     <>
       <NotesState showAlerts={showAlerts}>
         <Router>
-          <Navbar showAlerts={showAlerts}/>
+          <Navbar showAlerts={showAlerts} />
           <Alert alerts={alerts} />
           <div className="container">
             <Routes>
-              <Route path='/login' element={<LogIn showAlerts={showAlerts}/>} />
+              <Route path='/login' element={<LogIn showAlerts={showAlerts} />} />
               <Route path='/' element={<Home showAlerts={showAlerts} />} />
               <Route path='/addnotes' element={<AddNotes showAlerts={showAlerts} />} />
               <Route path='/notes' element={<Notes showAlerts={showAlerts} />} />
