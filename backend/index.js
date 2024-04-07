@@ -8,6 +8,21 @@ const app = express()
 app.use(express.json());
 app.use(cors())
 
+// Enable CORS for all requests
+app.use((req, res, next) => {
+  // Allow requests from any origin
+  res.header('Access-Control-Allow-Origin', '*');
+  // Allow GET, POST, PUT, DELETE methods
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  // Allow Content-Type and Authorization headers
+  res.header('Access-Control-Allow-Headers', 'Content-Type, auth-token, Authorization');
+  // Allow credentials to be included in the request
+  res.header('Access-Control-Allow-Credentials', true);
+  // Cache preflight request for 1 hour
+  res.header('Access-Control-Max-Age', 3600);
+  next();
+});
+
 /* // Allow requests from 'http://localhost:3000'
 app.use(cors({
   origin:"http://localhost:3000",
