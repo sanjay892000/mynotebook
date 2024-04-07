@@ -5,8 +5,12 @@ const cors = require('cors')
 const port = process.env.PORT_BACK || 5000 
 const app = express()
 
+app.use(cors({
+  origin:`http://localhost:5000`,
+    methods:"GET,POST,PUT,DELETE",
+    credentials:true}
+));
 app.use(express.json());
-app.use(cors());
 //call the database through client()
 connectToDatabase();
 
