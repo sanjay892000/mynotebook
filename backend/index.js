@@ -4,10 +4,11 @@ require('dotenv').config();
 const cors = require('cors')
 const port = process.env.PORT_BACK || 5000 
 const app = express()
+
 app.use(express.json());
+app.use(cors())
 
-
-// Allow requests from 'http://localhost:3000'
+/* // Allow requests from 'http://localhost:3000'
 app.use(cors({
   origin:"http://localhost:3000",
     methods:"GET,POST,PUT,DELETE",
@@ -16,7 +17,7 @@ app.use(cors({
 
 // Handle preflight requests
 app.options('*', cors());
-
+ */
 //call the database through client()
 connectToDatabase();
 
