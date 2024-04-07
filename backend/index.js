@@ -6,10 +6,18 @@ const port = process.env.PORT_BACK || 5000
 const app = express()
 
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+    origin:"*",
+    methods:"GET,POST,PUT,DELETE",
+    headers:"Content-Type, auth-token, Authorization",
+    credentials:true
+}))
+
+//Handle preflight OPTIONS request
+app.options('*', cors());
 
 // Enable CORS for all requests
-app.use((req, res, next) => {
+/* app.use((req, res, next) => {
   // Allow requests from any origin
   res.header('Access-Control-Allow-Origin', '*');
   // Allow GET, POST, PUT, DELETE methods
@@ -21,7 +29,7 @@ app.use((req, res, next) => {
   // Cache preflight request for 1 hour
   res.header('Access-Control-Max-Age', 3600);
   next();
-});
+}); */
 
 /* // Allow requests from 'http://localhost:3000'
 app.use(cors({

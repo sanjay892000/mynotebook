@@ -47,6 +47,7 @@ export default function NotesState(props) {
     setNotes(Notes.concat(note)) */
 
     await axios.post(`${BaseUrl}/api/notes/addnotes`, formData, {
+      mode: 'no-cors',
       headers: {
         "Content-Type": "multipart/form-data",
         "auth-token": localStorage.getItem('token')
