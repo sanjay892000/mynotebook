@@ -10,6 +10,9 @@ app.use(cors({
     methods:"GET,POST,PUT,DELETE",
     credentials:true}
 ));
+app.options('*', cors());
+
+
 app.use(express.json());
 //call the database through client()
 connectToDatabase();
