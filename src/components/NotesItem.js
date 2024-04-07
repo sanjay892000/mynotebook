@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import NotesContext from '../mynotes/NotesContext';
-import {BaseUrl} from '../Urls'
+/* import {BaseUrl} from '../Urls' */
 require('../styles/noteitems.css');
 
 
@@ -8,13 +8,19 @@ function NotesItem(props) {
     const { note, updateNotes } = props;
     const context = useContext(NotesContext);
     const { deleteNotes } = context;
-    const tagtext = note.tag
-    const tagname = tagtext.toLowerCase();
     const title = note.title
     const ftitle = title.charAt(0);
     const uptitle = ftitle.toUpperCase();
     const remtitle = title.slice(1)
     const titlename = uptitle + remtitle;
+    const dec= note.description;
+    const firstdec = dec.charAt(0)
+    const uprcsedec = firstdec.toUpperCase();
+    const remdec = dec.slice(1);
+    const allDescription = uprcsedec + remdec;
+    const tagtext = note.tag
+    const removespace = tagtext.replaceAll(" ","");
+    const tagname = removespace.toLowerCase();
 
     const notetype = note.type ? "public": "private"
 
@@ -34,9 +40,9 @@ function NotesItem(props) {
                             </div>
                             <hr />
                             <div className='notescomponent'>
-                                <p className="card-text">{note.description}</p>
+                                <p className="card-text">{allDescription}</p>
                                 {(tagname) ? <p><spam className="card-text notetag">#{tagname}</spam></p> : ''}
-                                {note.image ? <img src={`${BaseUrl}/${note.image}`} alt="loading..." />: ''}
+                                {note.image ? <img /* src={`${BaseUrl}/${note.image}`} */ src={`../../backend/uploads/${note.image}`} alt="loading..." />: ''}
                                 <p className="card-text font-size-sm mt-3 notedate">{note.date}</p>
                             </div>
                         </div>

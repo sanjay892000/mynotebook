@@ -34,7 +34,7 @@ const SignUp = (props) => {
     const note = await response.json()
     console.log(note);
     if (note.success) {
-      localStorage.setItem('token', note.authtoken);
+      /* localStorage.setItem('token', note.authtoken); */
       props.showAlerts('Your account has been successfully created', 'success', 'Success');
       navigate('/login');
     }
