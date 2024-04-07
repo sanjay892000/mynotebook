@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import NotesContext from '../mynotes/NotesContext';
-require('../styles/noteitems.css')
+import {BaseUrl} from '../Urls'
+require('../styles/noteitems.css');
 
 
 function NotesItem(props) {
@@ -35,7 +36,7 @@ function NotesItem(props) {
                             <div className='notescomponent'>
                                 <p className="card-text">{note.description}</p>
                                 {(tagname) ? <p><spam className="card-text notetag">#{tagname}</spam></p> : ''}
-                                {note.image ? <img src={`../uploads/${note.image}`} alt="loading..." />: ''}
+                                {note.image ? <img src={`${BaseUrl}/backend/${note.image}`} alt="loading..." />: ''}
                                 <p className="card-text font-size-sm mt-3 notedate">{note.date}</p>
                             </div>
                         </div>

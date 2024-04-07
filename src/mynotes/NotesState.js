@@ -31,7 +31,7 @@ export default function NotesState(props) {
     formData.append('description', description)
     formData.append('tag', tag)
     formData.append('type', type)
-    formData.append('image', image)
+    formData.append('image', image , image.name)
     //API call to add data into database
     /* const response = await fetch(`${BaseUrl}/api/notes/addnotes`, {
       method: "POST",
@@ -48,7 +48,7 @@ export default function NotesState(props) {
 
     await axios.post(`${BaseUrl}/api/notes/addnotes`, formData, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         "auth-token": localStorage.getItem('token')
       }
     })

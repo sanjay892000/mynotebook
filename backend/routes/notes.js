@@ -21,7 +21,6 @@ router.post('/addnotes', fetchallnotes, upload.single("image"), [
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() })
     }
-    console.log(req.body,"backend")
     try {
        
         const image = req.file ? req.file.filename : null;

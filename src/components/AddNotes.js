@@ -61,7 +61,7 @@ function AddNotes(props) {
                         <TextField
                             color="secondary" label="Tags(optional)" variant="outlined" name='tag' value={notes.tag} onChange={onChange} fullWidth />
                     </div>
-                    <input className='my-4' type="file" name='image' accept='image/png, image/jpeg' onChange={(e) => setImage(e.target.files[0])} >
+                    <input className='my-4' type="file" name='image' accept='"image/*"' onChange={(e) => setImage(e.target.files[0])} >
                     </input>
                     <div>
                         <FormControl>
