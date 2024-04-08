@@ -43,7 +43,7 @@ function AddNotes(props) {
 
         <>
             <div className='container'>
-                <Button className="mb-4" variant="text" color="secondary" startIcon={<ArrowBackIcon />} component={Link} to="/" style={{ textTransform: "none", fontFamily: "'Poppins', sans-serif" }}>Home</Button>
+                <Button variant="text" color="secondary" startIcon={<ArrowBackIcon />} component={Link} to="/" style={{ textTransform: "none", fontFamily: "'Poppins', sans-serif" }}>Home</Button>
                 <TopBody />
                 <h2 style={{ fontWeight: "Bold" }}>Create new Note</h2>
                 <p className="mb-4">Add  a new note with your info / notes</p>
@@ -79,7 +79,7 @@ function AddNotes(props) {
                     <div className='notes-button mt-4'>
                         {(notes.title && notes.description) ? <Button component={Link} to="/addnotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }} onClick={addBtnHandle}>Add Note</Button> : <Button component={Link} to="/AddNotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }} disabled>Add Note</Button>}
 
-                        <Button component={Link} to="/notes" className='' variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Your Notes</Button>
+                        <Button component={Link} to="/notes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Your Notes</Button>
                     </div>
                 </form>
             </div>

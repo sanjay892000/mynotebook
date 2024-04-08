@@ -53,8 +53,7 @@ const SignUp = (props) => {
         <div className="col-md-5 right-page">
           <img className="img-fluid" src={avataars} alt="register" style={{ width: "100%", height: "100vh", objectFit: "cover" }} />
         </div>
-
-        <div className="col-md-7 ps-5 pe-5 pt-5 left-page">
+        <div className="col-md-7 ps-5 pe-5 pt-1 left-page">
           <h2 style={{ fontWeight: "Bold" }}>Create a new account</h2>
           <p className="mb-4">Use your email to create a new account</p>
           <form autoComplete="off" noValidate>

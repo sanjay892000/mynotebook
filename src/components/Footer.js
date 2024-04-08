@@ -22,19 +22,19 @@ function Footer() {
                         <ul className="box">
                             <li className="link_name">Company</li>
                             <li><Link to="/">Home</Link></li>
-                            <li><Link to="/addnotes">New Notes</Link></li>
+                            <li>{localStorage.getItem('token') ? <Link to="/addnotes">New Notes</Link> : <Link to="/login">New Notes</Link>}</li>
                             <li><Link to="/about">About us</Link></li>
                             <li><Link to="/">Get started</Link></li>
                         </ul>
                         <ul className="box">
                             <li className="link_name">Services</li>
-                            <li><Link to="/">Your Notes</Link></li>
-                            <li><Link to="/addnotes">New Note</Link></li>
+                            <li>{localStorage.getItem('token') ? <Link to="/notes">Your Notes</Link> : <Link to="/login">Your Notes</Link>}</li>
+                            <li>{localStorage.getItem('token') ? <Link to="/addnotes">New Note</Link> : <Link to="/login">New Note</Link>}</li>
                         </ul>
                         <ul className="box">
                             <li className="link_name">Account</li>
-                            <li><Link to="/login">Sign-in</Link></li>
-                            <li><Link to="/signup">Join Free</Link></li>
+                            <li>{localStorage.getItem('token') ? <Link>Sign-in</Link> : <Link to="/login">Sign-in</Link>}</li>
+                            <li>{localStorage.getItem('token') ? <Link>Join Free</Link> : <Link to="/signup">Join Free</Link>}</li>
                         </ul>
                         <ul className="box top-category">
                             <li className="link_name">Top Categories</li>

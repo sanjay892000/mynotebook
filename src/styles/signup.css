@@ -8,6 +8,7 @@
 
 .left-page{
     width: 55vw;
+    margin-right: -10px;
 }
 
 
@@ -21,5 +22,17 @@
     }
     .left-page{
      width: 90vw;
+    }
+}
+@media (max-width: 470px){
+    .full-page{
+        display: flex;
+        flex-direction: column;
+    }
+    .right-page{
+        display: none;
+    }
+    .left-page{
+     width: 100vw;
     }
 }

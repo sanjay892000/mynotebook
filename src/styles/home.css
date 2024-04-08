@@ -2,9 +2,13 @@
     width: 600px;
 }
 
-
 @media(max-width: 600px){
     .addnotes {
         width: auto;
+
     }
+}
+
+.container-fluid{
+    padding-right :10px;
 }

@@ -27,7 +27,7 @@ export default function About() {
                             you can also access your notes anywhere in your world, at anytime time . So dont forget to Create note because creating anything is always important
                         </p>
                         <div className="d-flex justify-content-center m-3">
-                            <Button component={Link} to="/addnotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Create New Note</Button>
+                            {localStorage.getItem('token') ? <Button component={Link} to="/addnotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Create New Note</Button> : <Button component={Link} to="/login" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Create New Note</Button>}
                         </div>
                     </div>
                     <div className="col-md-6">
@@ -45,7 +45,7 @@ export default function About() {
                             How we started? The concept was simple. myNoteBook was born from the pain of writing all the things in notebook which is very hectic. An online web platform where you can create, edit, upload, delete your notes/information privately and securely without any disturbancee
                         </p>
                         <div className="d-flex justify-content-center mt-3">
-                            <Button component={Link} to="/signup" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Sign up now</Button>
+                            {localStorage.getItem('token') ? <Button component={Link} to="/signup" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }} disabled>You already signup</Button> : <Button component={Link} to="/signup" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Sign up now</Button>}
                         </div>
                     </div>
                 </div>

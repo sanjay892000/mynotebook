@@ -80,7 +80,7 @@ function Notes(props) {
                 </div>
             </div>
             <div className="d-flex justify-content-start m-5">
-                <Button component={Link} to="/AddNotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Create New Note</Button>
+                <Button component={Link} to="/AddNotes" variant="contained"  color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Create Note</Button>
             </div>
             <div className='row'>
                 <h3>Your Notes</h3>
