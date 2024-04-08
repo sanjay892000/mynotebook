@@ -8,7 +8,7 @@ const app = express()
 app.use(express.json());
 
 app.use(cors({
-  origin: "*",
+  origin: "https://mynotebook-two.vercel.app/",
   methods: "GET,POST,PUT,DELETE",
   headers: "Content-Type, auth-token",
   credentials: true
