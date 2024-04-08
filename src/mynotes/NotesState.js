@@ -15,7 +15,7 @@ export default function NotesState(props) {
     const response = await fetch(`${BaseUrl}/api/notes/getnotes`, {
       method: "GET", // *GET, POST, PUT, DELETE, etc.
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
         "auth-token": localStorage.getItem('token')
         /* "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwMzEzZTMyY2JmOWQ4ODFlNTMzNmExIn0sImlhdCI6MTY5NDcwMDYyMX0._7zsjnlY9wNnD7Uam_l0W3NiI9yBMYQ6vTbwtjzC-jI" */
       },
