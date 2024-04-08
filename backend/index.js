@@ -6,9 +6,9 @@ const port = process.env.PORT_BACK || 5000
 const app = express()
 
 app.use(express.json());
-
+const allowedOrigins = ['https://mynotebook-two.vercel.app', 'http://localhost:3000'];
 app.use(cors({
-  origin: "https://mynotebook-two.vercel.app",
+  origin: allowedOrigins,
   methods: "GET,POST,PUT,DELETE",
   headers: "Content-Type, auth-token",
   credentials: true
