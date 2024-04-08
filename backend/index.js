@@ -1,33 +1,35 @@
 const express = require('express');
 const connectToDatabase = require('./database');
 require('dotenv').config();
-const cors = require('cors')
-const port = process.env.PORT_BACK || 5000 
+/* const cors = require('cors') */
+const port = process.env.PORT_BACK || 5000
 const app = express()
 
 app.use(express.json());
+/* 
 app.use(cors({
-    origin:"*",
-    methods:"GET,POST,PUT,DELETE",
-    headers:"Content-Type, auth-token, Authorization",
-    credentials:true
+  origin: "*",
+  methods: "GET,POST,PUT,DELETE",
+  headers: "Content-Type, auth-token, Authorization",
+  credentials: true
 }))
 
 //Handle preflight OPTIONS request
 app.options('*', cors());
-
+ */
 // Enable CORS for all requests
-app.use((req, res, next) => {
+app.use('*',(req, res, next) => {
   // Allow requests from any origin
   res.header('Access-Control-Allow-Origin', '*');
   // Allow GET, POST, PUT, DELETE methods
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   // Allow Content-Type and Authorization headers
-  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Allow-Headers', 'content-type, auth-token');
   // Allow credentials to be included in the request
   res.header('Access-Control-Allow-Credentials', true);
   // Cache preflight request for 1 hour
   res.header('Access-Control-Max-Age', 3600);
+  res.sendStatus(200);
   next();
 });
 
