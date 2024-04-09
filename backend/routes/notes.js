@@ -17,7 +17,7 @@ router.post('/addnotes', fetchallnotes, upload.single("image"), [
         return res.status(400).json({ errors: errors.array() })
     }
     try {
-
+       
         const image = req.file ? req.file.filename : null;
         const { title, description, tag, type } = req.body;
         const parsedType = type ? JSON.parse(type) : false;
@@ -26,14 +26,13 @@ router.post('/addnotes', fetchallnotes, upload.single("image"), [
             description,
             tag,
             image,
-            type: parsedType,
+            type:parsedType,
             user: req.user.id
         });
         const saveNotes = await notes.save();
         res.json(saveNotes);
-        res.status(200).json({ msg: "New note added", success: true });
     } catch (error) {
-        res.status(500).json({ msg: "Unabe to add note", success: false, error: error.message });
+      console.log(error)
     }
 })
 
