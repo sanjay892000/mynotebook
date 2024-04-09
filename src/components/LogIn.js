@@ -13,7 +13,9 @@ function LogIn(props) {
     const [showPassword, setShowPassword] = useState(false);
     const [credentials, setCredentials] = useState({ email: "", password: "" });
 
-
+    const loginwithgoogle = () => {
+        window.open("http://localhost:5000/api/auth/google/callback", "_self")
+    }
     const handleSubmit = async (e) => {
         e.preventDefault();
         const response = await fetch(`${BaseUrl}/api/auth/loginuser`, {
@@ -44,12 +46,6 @@ function LogIn(props) {
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
-    /*     const responseMessage = (response) => {
-            console.log(response);
-        };
-        const errorMessage = (error) => {
-            console.log(error);
-        }; */
 
     return (
         <div className="full-page">
@@ -93,8 +89,8 @@ function LogIn(props) {
                 <div className="container addnotes">
                     <p className="mb-4 border">OR</p>
                     <div className="d-flex loginbutton">
+                        <Button size="large" fullWidth className="mb-4" variant="contained" color="error" startIcon={<GoogleIcon />} component={Link} to="/login" style={{ textTransform: "none", fontSize: "1.1rem", color: "White", fontFamily: "'Poppins', sans-serif" }} onClick={loginwithgoogle}>Login with Google</Button>
                         <Button size="large" fullWidth className="mb-4 me-4" variant="contained" color="primary" startIcon={<FacebookIcon />} component={Link} to="/login" style={{ textTransform: "none", fontSize: "1.1rem", color: "White", fontFamily: "'Poppins', sans-serif" }}>Login with Facebook</Button>
-                        <Button size="large" fullWidth className="mb-4" variant="contained" color="error" startIcon={<GoogleIcon />} component={Link} to="/login" style={{ textTransform: "none", fontSize: "1.1rem", color: "White", fontFamily: "'Poppins', sans-serif" }}>Login with Google</Button>
                         {/* <GoogleLogin onSuccess={responseMessage} onError={errorMessage} /> */}
                     </div>
                 </div>

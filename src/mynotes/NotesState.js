@@ -15,9 +15,7 @@ export default function NotesState(props) {
     const response = await fetch(`${BaseUrl}/api/notes/getnotes`, {
       method: "GET", // *GET, POST, PUT, DELETE, etc.
       headers: {
-        "Content-Type": "multipart/form-data",
         "auth-token": localStorage.getItem('token')
-        /* "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwMzEzZTMyY2JmOWQ4ODFlNTMzNmExIn0sImlhdCI6MTY5NDcwMDYyMX0._7zsjnlY9wNnD7Uam_l0W3NiI9yBMYQ6vTbwtjzC-jI" */
       },
     });
     const fetchNotes = await response.json();
@@ -31,7 +29,9 @@ export default function NotesState(props) {
     formData.append('description', description)
     formData.append('tag', tag)
     formData.append('type', type)
-    formData.append('image', image , image.name)
+    if(image){
+      formData.append('image', image , image.name)
+    };
     //API call to add data into database
     /* const response = await fetch(`${BaseUrl}/api/notes/addnotes`, {
       method: "POST",
@@ -47,7 +47,6 @@ export default function NotesState(props) {
     setNotes(Notes.concat(note)) */
 
     await axios.post(`${BaseUrl}/api/notes/addnotes`, formData, {
-      mode: 'no-cors',
       headers: {
         "Content-Type": "multipart/form-data",
         "auth-token": localStorage.getItem('token')

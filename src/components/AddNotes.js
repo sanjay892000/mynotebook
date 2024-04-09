@@ -35,7 +35,6 @@ function AddNotes(props) {
     }
     const onChange = (e) => {
         setNotes({ ...notes, [e.target.name]: e.target.value })
-        console.log(notes.type)
     }
 
 

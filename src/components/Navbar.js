@@ -4,6 +4,7 @@ import logo from '../images/logo.png'
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
+/* import axios from "axios" */
 import '../styles/userdetails.css'
 import usericon from '../images/usericon.png'
 import { BaseUrl } from '../Urls';
@@ -38,7 +39,24 @@ const NavBar = (props) => {
     const json = await response.json();
     setUser(json);
   }
-
+  /*   const [userdata, setUserdata] = useState({});
+    console.log("response", userdata) */
+  /* 
+    const getUser = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/auth/getuser", { withCredentials: true });
+  
+        setUserdata(response.data.user)
+      } catch (error) {
+        console.log("error", error)
+      }
+    }
+  
+    // logoout
+    const logout = () => {
+      window.open("http://localhost:5000/api/auth/logout", "_self")
+    }
+   */
 
 
   //for drawer
@@ -60,7 +78,7 @@ const NavBar = (props) => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <div className='user-icon'><img src={usericon} alt="loading.."/></div>
+      <div className='user-icon'><img src={usericon} alt="loading.." /></div>
       <div className="user-name" name='username' >{user.name}</div>
       <div className="user-email" name='useremail'>{user.emails}</div>
       <Divider />
@@ -87,7 +105,7 @@ const NavBar = (props) => {
             {localStorage.getItem('token') ?
               <div>{['right'].map((anchor) => (
                 <React.Fragment key={anchor}>
-                  <Link onClick={toggleDrawer(anchor, true)}><img className='mx-3 cursor-pointer' src={usericon} alt="Loading...." style={{ width: "50px", Height: "50px" }}onClick={fetchUser}/></Link>
+                  <Link onClick={toggleDrawer(anchor, true)}><img className='mx-3 cursor-pointer' src={usericon} alt="Loading...." style={{ width: "50px", Height: "50px" }} onClick={fetchUser} /></Link>
                   <Drawer
                     anchor={anchor}
                     open={state[anchor]}
