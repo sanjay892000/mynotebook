@@ -31,7 +31,8 @@ function AddNotes(props) {
     const [image, setImage] = useState(null)
     const addBtnHandle = () => {
         addNotes(notes.title, notes.description, notes.tag, notes.type, image)
-        props.showAlerts('Successful Added Notes', 'success', 'Success');
+        setNotes({ title: '', description: '', tag: '', type: '' });
+        setImage(null);
     }
     const onChange = (e) => {
         setNotes({ ...notes, [e.target.name]: e.target.value })

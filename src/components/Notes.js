@@ -4,11 +4,11 @@ import NotesItem from './NotesItem';
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button } from '@mui/material';
+import {toast } from 'react-toastify';
 
 
 
 function Notes(props) {
-    const { showAlerts } = props;
     const context = useContext(NotesContext);
     const { Notes, getNotes, editNotes } = context;
     const navigate = useNavigate();
@@ -33,7 +33,7 @@ function Notes(props) {
     const handleClick = () => {
         editNotes(updatenote.id, updatenote.etitle, updatenote.edescription, updatenote.etag)
         refClose.current.click();
-        showAlerts('Your note has been updated', 'success', 'Success');
+        toast.success('Your note has been updated');
     }
 
     const onChange = (e) => {
@@ -89,7 +89,7 @@ function Notes(props) {
                 </div>
                 {Notes.map((note) => {
                     return <>
-                        <NotesItem key={note.id} note={note} updateNotes={updateNotes} showAlerts={showAlerts} />
+                        <NotesItem key={note.id} note={note} updateNotes={updateNotes}/>
                     </>
                 })}
             </div>

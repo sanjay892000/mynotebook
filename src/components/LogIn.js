@@ -6,6 +6,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import { Link, useNavigate } from "react-router-dom";
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import {toast } from 'react-toastify';
 import { BaseUrl } from '../Urls';
 
 function LogIn(props) {
@@ -28,11 +29,12 @@ function LogIn(props) {
         const user = await response.json();
         if (user.success) {
             localStorage.setItem('token', user.auth_token);
-            props.showAlerts('Your account has been successfully login', 'success', 'Success');
+            toast.success('Successfully logged in');
+            setCredentials({email:"", password:""})
             navigate('/');
         }
         else {
-            props.showAlerts('Invalid credentials', 'danger', 'Failed');
+            toast.error('Please check email & password');
         }
     }
     const onChange = (e) => {
@@ -83,7 +85,9 @@ function LogIn(props) {
                         </div>
                     </div>
                     <Button type="submit" fullWidth size="large" className="mb-4" variant="contained" color="secondary" style={{ textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.1rem" }} onClick={handleSubmit}>Login</Button>
-                    <p>If don't have an account? <Link to="/signup" >Register</Link> </p>
+                    <div className="extra-comp d-flex justify-content-between">
+                    <p>If don't have an account? <Link to="/signup" >Register</Link> </p> <p>forgot password? <Link to="/forgot-password" >click here</Link></p>
+                    </div>
                     <hr />
                 </form>
                 <div className="container addnotes">

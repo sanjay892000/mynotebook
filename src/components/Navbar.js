@@ -4,7 +4,7 @@ import logo from '../images/logo.png'
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
-/* import axios from "axios" */
+import {toast } from 'react-toastify';
 import '../styles/userdetails.css'
 import usericon from '../images/usericon.png'
 import { BaseUrl } from '../Urls';
@@ -17,7 +17,7 @@ const NavBar = (props) => {
 
   const handleLogOut = () => {
     localStorage.removeItem('token');
-    props.showAlerts('Your account has been successfully logout', 'success', 'Success');
+    toast.success('Successfully logged out');
     navigate('/login');
   }
   let location = useLocation();
@@ -39,25 +39,6 @@ const NavBar = (props) => {
     const json = await response.json();
     setUser(json);
   }
-  /*   const [userdata, setUserdata] = useState({});
-    console.log("response", userdata) */
-  /* 
-    const getUser = async () => {
-      try {
-        const response = await axios.get("http://localhost:5000/api/auth/getuser", { withCredentials: true });
-  
-        setUserdata(response.data.user)
-      } catch (error) {
-        console.log("error", error)
-      }
-    }
-  
-    // logoout
-    const logout = () => {
-      window.open("http://localhost:5000/api/auth/logout", "_self")
-    }
-   */
-
 
   //for drawer
   const [state, setState] = React.useState({

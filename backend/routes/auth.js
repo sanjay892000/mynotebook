@@ -113,4 +113,19 @@ router.post('/fetchuser',fetchdata, async (req, res) => {
     }
 
 })
+
+router.post('/forgot-password',[body('emails', 'enter a valid emails').isEmail()], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({errors: errors.array() }); //400 is bad request
+    }
+   console.log(req.body)
+   const  {emails}= req.body;
+   if(!emails){
+    return res.status(400).json({massage: "enter your email" });
+   }
+   
+})
+
+
 module.exports = router;

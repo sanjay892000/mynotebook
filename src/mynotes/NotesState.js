@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import NotesContext from './NotesContext';
+import {toast } from 'react-toastify';
 import { BaseUrl } from '../Urls';
 import axios from 'axios';
 
@@ -7,7 +8,6 @@ import axios from 'axios';
 export default function NotesState(props) {
   const myNotes = [];
   const [Notes, setNotes] = useState(myNotes);
-  const { showAlerts } = props;
 
   //fetch Notes
   const getNotes = async () => {
@@ -55,10 +55,10 @@ export default function NotesState(props) {
       .then((res) => {
         const note = res.data;
         setNotes(Notes.concat(note))
-        showAlerts('Your note has been deleted', 'danger', 'Success');
+        toast.success('Your note has been added');
       })
       .catch((err) => {
-        console.log(err)
+        toast.error('Title must be unique')
       })
 
   }
@@ -78,7 +78,7 @@ export default function NotesState(props) {
     console.log(json)
     const newNote = Notes.filter((note) => { return note._id !== id });
     setNotes(newNote);
-    showAlerts('Your note has been deleted', 'danger', 'Success');
+    toast.success('Your note has been deleted');
   }
 
   //Edit Notes

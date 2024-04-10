@@ -4,6 +4,7 @@ import { TextField, Button, InputAdornment, InputLabel, OutlinedInput, FormContr
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import avataars from "../images/avataaars.png";
+import {toast } from 'react-toastify';
 import '../styles/signup.css'
 import { BaseUrl } from '../Urls';
 
@@ -35,11 +36,12 @@ const SignUp = (props) => {
     console.log(note);
     if (note.success) {
       /* localStorage.setItem('token', note.authtoken); */
-      props.showAlerts('Your account has been successfully created', 'success', 'Success');
+      toast.success('Your account has been successfully created');
+      setcredintials({name:"", email:"", password:"", repassword:"" })
       navigate('/login');
     }
     else {
-      props.showAlerts('Invalid credentials', 'danger', 'Failed');
+      toast.error('Invalid credentials');
     }
   }
   const onChange = (e) => {
