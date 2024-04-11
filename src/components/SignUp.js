@@ -53,7 +53,7 @@ const SignUp = (props) => {
     <div>
       <div className="d-flex full-page" >
         <div className="col-md-5 right-page">
-          <img className="img-fluid" src={avataars} alt="register" style={{ width: "100%", height: "100vh", objectFit: "cover" }} />
+          <img className="img-fluid mt-5" src={avataars} alt="register" style={{ width: "100%", height: "100vh", objectFit: "cover" }} />
         </div>
         <div className="col-md-7 ps-5 pe-5 pt-1 left-page">
           <h2 style={{ fontWeight: "Bold" }}>Create a new account</h2>
