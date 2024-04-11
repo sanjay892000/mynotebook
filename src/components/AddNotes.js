@@ -55,7 +55,8 @@ function AddNotes(props) {
                     </div>
                     <div className="description mb-4">
                         <TextField
-                            color="secondary" label="Description" variant="outlined" name='description' value={notes.description} onChange={onChange} fullWidth />
+                            color="secondary" label="Description" variant="outlined" name='description' value={notes.description} onChange={onChange} multiline
+                            rows={4} fullWidth/>
                     </div>
                     <div className="tags">
                         <TextField

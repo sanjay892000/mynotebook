@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import NotesContext from './NotesContext';
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { BaseUrl } from '../Urls';
 import axios from 'axios';
 
@@ -29,8 +29,8 @@ export default function NotesState(props) {
     formData.append('description', description)
     formData.append('tag', tag)
     formData.append('type', type)
-    if(image){
-      formData.append('image', image , image.name)
+    if (image) {
+      formData.append('image', image, image.name)
     };
     //API call to add data into database
     /* const response = await fetch(`${BaseUrl}/api/notes/addnotes`, {

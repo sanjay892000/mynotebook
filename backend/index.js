@@ -1,8 +1,8 @@
 const express = require('express');
 const connectToDatabase = require('./database');
 require('dotenv').config();
-const session = require("express-session");
-const passport = require("passport");
+/* const session = require("express-session");
+const passport = require("passport"); */
 const cors = require('cors');
 const port = process.env.PORT_BACK || 5000
 const app = express()
@@ -17,7 +17,7 @@ app.use(cors({
 
 app.use(express.json());
 
-// setup session
+/* // setup session
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
@@ -27,7 +27,7 @@ app.use(session({
 // setuppassport
 app.use(passport.initialize());
 app.use(passport.session());
-
+ */
 //call the database through client()
 connectToDatabase();
 
