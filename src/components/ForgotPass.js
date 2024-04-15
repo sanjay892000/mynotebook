@@ -32,7 +32,7 @@ function ForgotPass(props) {
             setSendEmail(true);
         }
         else {
-            toast.error('This email is not exist');
+            toast.error('Please check your email');
             setSendEmail(false)
         }
 
