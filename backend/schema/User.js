@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { Schema } = mongoose;
 
 const UserSchema = new mongoose.Schema({
    name:{
@@ -11,10 +10,6 @@ const UserSchema = new mongoose.Schema({
     required:true,
     unique:true
    },
-   /* contact:{
-    type:String,
-    required:true
-   }, */
    password:{
     type:String,
     required:true

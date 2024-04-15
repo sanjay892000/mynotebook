@@ -16,6 +16,7 @@ import Footer from './components/Footer';
 import PageNotFound from './components/PageNotFound';
 import PublicNotes from './components/PublicNotes';
 import ForgotPass from './components/ForgotPass';
+import NewPassword from './components/NewPassword';
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
             <Routes>
               <Route path='/login' element={<LogIn/>}/>
               <Route path='/forgot-password' element={<ForgotPass/>}/>
+              <Route path='/new-password/:id/:auth_token/' element={<NewPassword/>}/>
               <Route path='/' element={<Home/>}/>
               <Route path='/addnotes' element={<AddNotes/>}/>
               <Route path='/notes' element={<Notes/>}/>

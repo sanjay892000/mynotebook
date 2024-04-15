@@ -45,8 +45,7 @@ const SignUp = (props) => {
     }
   }
   const onChange = (e) => {
-    setcredintials({ ...credintials, [e.target.name]: e.target.value })
-
+    setcredintials({ ...credintials, [e.target.name]: e.target.value });
   }
 
   return (
