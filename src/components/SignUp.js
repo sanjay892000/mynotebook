@@ -13,9 +13,13 @@ const SignUp = (props) => {
   const [credintials, setcredintials] = useState({ name: "", email: "", password: "", repassword: "" });
 
   const [showPassword, setShowPassword] = useState(false)
+  const [showrePassword, setShowrePassword] = useState(false)
 
   const handleClickShowPassword = () => {
       setShowPassword(!showPassword)
+  };
+  const handleClickShowrePassword = () => {
+      setShowrePassword(!showrePassword)
   };
 
   const handleMouseDownPassword = (event) => {
@@ -96,6 +100,19 @@ const SignUp = (props) => {
                   name='repassword'
                   value={credintials.repassword}
                   color="secondary"
+                  type={showrePassword ? 'text' : 'password'}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowrePassword}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showrePassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
                   label="Re-Password" onChange={onChange}/>
               </FormControl>
             </div>
