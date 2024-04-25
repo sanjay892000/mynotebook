@@ -132,7 +132,7 @@ router.post('/forgot-password', [body('emails', 'enter a valid emails').isEmail(
         return res.status(400).json({ massage: "enter your email" });
     }
     try {
-        
+
         const user = await User.findOne({ emails: emails });
         const userName = user.name;
         const data = {
@@ -147,63 +147,99 @@ router.post('/forgot-password', [body('emails', 'enter a valid emails').isEmail(
                 to: emails,
                 subject: "myNoteBook reset password",
                 /* text: `This link valid only for 5 minutes https://mynotebook-crtdby-sanjay.netlify.app/new-password/${user.id}/${auth_token} `, */
-                html:`<!DOCTYPE html>
+                html: `<!DOCTYPE html>
                 <html lang="en">
                     <head>
                         <meta charset="UTF-8">
                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
                         <title>myNoteBook</title>
+                        <style>
+                            .main-page{
+                                height: auto;
+                                width: 100vw;
+                                background: #d2dce1;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center; 
+                                padding: 10px 0px;
+                            }
+                            .top-page{
+                                height: auto;
+                                width: 100%;
+                                background: #01111a;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: space-evenly;
+                            }
+                            .top-page h1{
+                                color: white;
+                            text-align: center;
+                            margin: 10px 0px;
+                            padding: 5px;}
+                            .top-page p{
+                                color: white;
+                                                text-align: center;
+                                                margin: 10px 0px;
+                                                padding: 5px;
+                            }
+                            @media (max-width:450px){
+                                .top-page h1{
+                                font-size: 20px;
+                                }
+                            }
+                            .top-page h4{
+                                color: white;
+                                                text-align: center;
+                                                margin: 10px 0px;
+                                                padding: 5px;
+                            }
+                            .top-page h4 span{
+                                color:red;
+                            } 
+                            .top-page button{
+                                height: 50px;
+                                                width: 150px;
+                                                color: white;
+                                                background-color: #075186;
+                                                border-radius: 4px;
+                                                cursor: pointer;
+                                                margin: 10px;
+                            }
+                            .top-page div p{
+                                color: rgb(0, 0, 0);
+                                                text-align: center;
+                                                margin: 10px 0px;
+                                                padding: 10px; font-family:arial;
+                            }
+                         </style>
                     </head>
                     <body>
-                        <div class="main" style="height: auto;
-                        width: 100vw;
-                        background: #d2dce1;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center; ">
-                            <div class="top-page" style="height: auto;
-                            width: 100%;
-                            background: #01111a;
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            justify-content: space-evenly;">
-                                <h1 style="color: white;
-                                text-align: center;
-                                margin: 10px 0px;
-                                padding: 5px;">Welcome to myNoteBook <hr></h1>
-                                <p style="color: white;
-                                text-align: center;
-                                margin: 10px 0px;
-                                padding: 5px;">Hii ${userName},</p>
-                                <h4 style="color: white;
-                                text-align: center;
-                                margin: 10px 0px;
-                                padding: 5px;">Make something<span style="color:red;"> Awesome</span></h4>
+                        <div class="main-page">
+                            <div class="top-page">
+                                <h1>Welcome to myNoteBook <hr></h1>
+                                <p>Hii ${userName},</p>
+                                <h4>Make something<span> Awesome</span></h4>
                                 <p style="color: red;
-                                text-align: center;
-                                margin: 10px 0px;
-                                padding: 5px;">This is valid only for 5 minutes</p>
-                                <button style=" height: 50px;
-                                width: 150px;
-                                color: white;
-                                background-color: #075186;
-                                border-radius: 4px;
-                                cursor: pointer;
-                                margin: 10px;"> <a href="https://mynotebook-crtdby-sanjay.netlify.app/new-password/${user.id}/${auth_token}"></a> Reset password</button>
+                                                text-align: center;
+                                                margin: 10px 0px;
+                                                padding: 5px;">This is valid only for 5
+                                    minutes</p>
+                                <button > <a
+                                        href="https://mynotebook-crtdby-sanjay.netlify.app/new-password/${user.id}/${auth_token}"></a>
+                                    Reset password</button>
                                 <div style="height: auto;
-                                width: 100%;
-                                background: #ffffff;">
-                                <p style="color: rgb(0, 0, 0);
-                                text-align: center;
-                                margin: 10px 0px;
-                                padding: 10px; font-family:arial;" >myNoteBook is made from the pain of writing all the things in
-                                    notebook which is very hectic So we mad an online web
-                                    platform where you can create, edit, upload, delete your
-                                    notes/information privately and securely without any
-                                    disturbancee. you can also access your notes anywhere in
-                                    your world, at anytime time . So dont forget to Create note
-                                    because creating anything is always important.</p></div>
+                                                width: 100%;
+                                                background: #ffffff;">
+                                    <p >myNoteBook is
+                                        made from the pain of writing all the things in
+                                        notebook which is very hectic So we mad an online web
+                                        platform where you can create, edit, upload, delete your
+                                        notes/information privately and securely without any
+                                        disturbancee. you can also access your notes anywhere in
+                                        your world, at anytime time . So dont forget to Create
+                                        note
+                                        because creating anything is always important.</p></div>
                             </div>
                         </div>
                 
@@ -220,10 +256,10 @@ router.post('/forgot-password', [body('emails', 'enter a valid emails').isEmail(
                     return res.status(201).send("message send");
                 }
             });
-            const success=true;
-            res.json({success,message:"message send"});
+            const success = true;
+            res.json({ success, message: "message send" });
         }
-        else{
+        else {
             console.log("massage not send")
         }
     }
@@ -237,8 +273,8 @@ router.get('/new-password/:id/:auth_token', async (req, res) => {
     const { id, auth_token } = req.params;
     try {
         const user = await User.findOne({ _id: id });
-        const token = jwt.verify(auth_token,JWT_SECRET)
-        res.send(user,token);
+        const token = jwt.verify(auth_token, JWT_SECRET)
+        res.send(user, token);
     } catch (error) {
         console.log(error.massage);
         return res.status(500).send("Intrnal server error2");
@@ -247,8 +283,8 @@ router.get('/new-password/:id/:auth_token', async (req, res) => {
 });
 
 router.post('/update-password/:id/:auth_token', [body('password', 'enter password atleast minimum 8 characters').isLength({ min: 8 })], async (req, res) => {
-    const {id}  = req.params;
-    const {password} = req.body;
+    const { id } = req.params;
+    const { password } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() }); //400 is bad request
@@ -257,7 +293,7 @@ router.post('/update-password/:id/:auth_token', [body('password', 'enter passwor
         const salt = await bcrypt.genSalt(10); //return promise so use await ,
         const secpassword = await bcrypt.hash(password, salt);
         // use await bcs it return promise
-        const setPassword = await User.findByIdAndUpdate({_id:id},{password:secpassword}) ;
+        const setPassword = await User.findByIdAndUpdate({ _id: id }, { password: secpassword });
         setPassword.save();
         const data = {
             user: {
