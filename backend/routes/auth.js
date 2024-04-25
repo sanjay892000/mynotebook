@@ -134,6 +134,7 @@ router.post('/forgot-password', [body('emails', 'enter a valid emails').isEmail(
     try {
         
         const user = await User.findOne({ emails: emails });
+        const userName = user.name;
         const data = {
             user: {
                 id: user.id
@@ -144,8 +145,70 @@ router.post('/forgot-password', [body('emails', 'enter a valid emails').isEmail(
             const mailOptions = {
                 from: "sanjay892000@gmail.com",
                 to: emails,
-                subject: "Sending mail for password reset",
-                text: `This link valid for 5 minutes https://mynotebook-crtdby-sanjay.netlify.app/new-password/${user.id}/${auth_token} `
+                subject: "myNoteBook reset password",
+                /* text: `This link valid only for 5 minutes https://mynotebook-crtdby-sanjay.netlify.app/new-password/${user.id}/${auth_token} `, */
+                html:`<!DOCTYPE html>
+                <html lang="en">
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>myNoteBook</title>
+                    </head>
+                    <body>
+                        <div class="main" style="height: auto;
+                        width: 100vw;
+                        background: #d2dce1;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center; ">
+                            <div class="top-page" style="height: auto;
+                            width: 100%;
+                            background: #01111a;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: space-evenly;">
+                                <h1 style="color: white;
+                                text-align: center;
+                                margin: 10px 0px;
+                                padding: 5px;">Welcome to myNoteBook <hr></h1>
+                                <p style="color: white;
+                                text-align: center;
+                                margin: 10px 0px;
+                                padding: 5px;">Hii ${userName},</p>
+                                <h4 style="color: white;
+                                text-align: center;
+                                margin: 10px 0px;
+                                padding: 5px;">Make something<span style="color:red;"> Awesome</span></h4>
+                                <p style="color: red;
+                                text-align: center;
+                                margin: 10px 0px;
+                                padding: 5px;">This is valid only for 5 minutes</p>
+                                <button style=" height: 50px;
+                                width: 150px;
+                                color: white;
+                                background-color: #075186;
+                                border-radius: 4px;
+                                cursor: pointer;
+                                margin: 10px;"> <a href="https://mynotebook-crtdby-sanjay.netlify.app/new-password/${user.id}/${auth_token}"></a> Reset password</button>
+                                <div style="height: auto;
+                                width: 100%;
+                                background: #ffffff;">
+                                <p style="color: rgb(0, 0, 0);
+                                text-align: center;
+                                margin: 10px 0px;
+                                padding: 10px; font-family:arial;" >myNoteBook is made from the pain of writing all the things in
+                                    notebook which is very hectic So we mad an online web
+                                    platform where you can create, edit, upload, delete your
+                                    notes/information privately and securely without any
+                                    disturbancee. you can also access your notes anywhere in
+                                    your world, at anytime time . So dont forget to Create note
+                                    because creating anything is always important.</p></div>
+                            </div>
+                        </div>
+                
+                    </body>
+                </html>`
             };
             transporter.sendMail(mailOptions, (err, info) => {
                 if (err) {
