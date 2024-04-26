@@ -146,7 +146,6 @@ router.post('/forgot-password', [body('emails', 'enter a valid emails').isEmail(
                 from: "sanjay892000@gmail.com",
                 to: emails,
                 subject: "myNoteBook reset password",
-                /* text: `This link valid only for 5 minutes https://mynotebook-crtdby-sanjay.netlify.app/new-password/${user.id}/${auth_token} `, */
                 html: `<!DOCTYPE html>
                 <html lang="en">
                     <head>
@@ -154,95 +153,75 @@ router.post('/forgot-password', [body('emails', 'enter a valid emails').isEmail(
                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
                         <title>myNoteBook</title>
                         <style>
-                            .main-page{
-                                height: auto;
-                                width: 100vw;
-                                background: #d2dce1;
-                                display: flex;
-                                flex-direction: column;
-                                align-items: center; 
-                                padding: 10px 0px;
-                            }
-                            .top-page{
-                                height: auto;
-                                width: 100%;
-                                background: #01111a;
-                                display: flex;
-                                flex-direction: column;
-                                align-items: center;
-                                justify-content: space-evenly;
-                            }
-                            .top-page h1{
-                                color: white;
-                            text-align: center;
-                            margin: 10px 0px;
-                            padding: 5px;}
-                            .top-page p{
-                                color: white;
-                                                text-align: center;
-                                                margin: 10px 0px;
-                                                padding: 5px;
-                            }
-                            @media (max-width:450px){
-                                .top-page h1{
-                                font-size: 20px;
+                                body {
+                                    margin: 0;
+                                    padding: 0;
+                                    font-family: Arial, sans-serif;
+                                    background-color: #d2dce1;
                                 }
-                            }
-                            .top-page h4{
-                                color: white;
-                                                text-align: center;
-                                                margin: 10px 0px;
-                                                padding: 5px;
-                            }
-                            .top-page h4 span{
-                                color:red;
-                            } 
-                            .top-page button{
-                                height: 50px;
-                                                width: 150px;
-                                                color: white;
-                                                background-color: #075186;
-                                                border-radius: 4px;
-                                                cursor: pointer;
-                                                margin: 10px;
-                            }
-                            .top-page div p{
-                                color: rgb(0, 0, 0);
-                                                text-align: center;
-                                                margin: 10px 0px;
-                                                padding: 10px; font-family:arial;
-                            }
-                         </style>
+                                .container {
+                                    max-width: 600px;
+                                    margin: 0 auto;
+                                    padding: 20px;
+                                    background-color: #ffffff;
+                                }
+                                .header {
+                                    background-color: #01111a;
+                                    color: #ffffff;
+                                    padding: 20px;
+                                    text-align: center;
+                                }
+                                .content {
+                                    padding: 20px;
+                                }
+                                .awesome{
+                                    color: red;
+                                }
+                                .button {
+                                    display: block;
+                                    width: 150px;
+                                    margin: 20px auto;
+                                    padding: 10px;
+                                    background-color: #075186;
+                                    color: #ffffff;
+                                    text-align: center;
+                                    text-decoration: none;
+                                    border-radius: 4px;
+                                }
+                                .footer {
+                                    background-color: #f4f4f4;
+                                    padding: 20px;
+                                }
+                            </style>
                     </head>
                     <body>
-                        <div class="main-page">
-                            <div class="top-page">
-                                <h1>Welcome to myNoteBook <hr></h1>
-                                <p>Hii ${userName},</p>
-                                <h4>Make something<span> Awesome</span></h4>
-                                <p style="color: red;
-                                                text-align: center;
-                                                margin: 10px 0px;
-                                                padding: 5px;">This is valid only for 5
-                                    minutes</p>
-                                <button > <a
-                                        href="https://mynotebook-crtdby-sanjay.netlify.app/new-password/${user.id}/${auth_token}"></a>
-                                    Reset password</button>
-                                <div style="height: auto;
-                                                width: 100%;
-                                                background: #ffffff;">
-                                    <p >myNoteBook is
-                                        made from the pain of writing all the things in
-                                        notebook which is very hectic So we mad an online web
-                                        platform where you can create, edit, upload, delete your
-                                        notes/information privately and securely without any
-                                        disturbancee. you can also access your notes anywhere in
-                                        your world, at anytime time . So dont forget to Create
-                                        note
-                                        because creating anything is always important.</p></div>
+                        <div class="container">
+                            <div class="header">
+                                <h1>Welcome to myNoteBook</h1>
+                
+                                <div class="content">
+                                    <p>Hii ${userName},</p>
+                                    <h4>Make something <span class="awesome">Awesome</span></h4>
+                                    <p style="color: red;">This is valid only for 5 minutes</p>
+                                    <a
+                                        href="https://mynotebook-crtdby-sanjay.netlify.app/new-password/${user.id}/${auth_token}"
+                                        class="button">Reset password</a>
+                                </div>
+                            </div>
+                            <p>myNoteBook is made from the pain of writing all the
+                                things in a notebook which is very hectic. So we made an
+                                online web platform where you can create, edit, upload,
+                                delete your notes/information privately and securely
+                                without any disturbance. You can also access your notes
+                                anywhere in your world, at any time. So don't forget to
+                                create a note because creating anything is always
+                                important.</p>
+                
+                            <div class="footer">
+                                <p style="text-align: center;">© 2024 myNoteBook. All rights
+                                    reserved.</p>
                             </div>
                         </div>
-                
                     </body>
                 </html>`
             };
