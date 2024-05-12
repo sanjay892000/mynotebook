@@ -120,8 +120,8 @@ router.post('/forgot-password', [body('emails', 'enter a valid emails').isEmail(
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'sanjay892000@gmail.com',
-            pass: 'ltunopvpjtmgarie'
+            user: 'mynotebook.gov.in@gmail.com',
+            pass: 'fdsypytrczpbqihp'
         }
     });
     if (!errors.isEmpty()) {
@@ -143,9 +143,9 @@ router.post('/forgot-password', [body('emails', 'enter a valid emails').isEmail(
         const auth_token = jwt.sign(data, JWT_SECRET, { expiresIn: "5m" });
         if (auth_token) {
             const mailOptions = {
-                from: "sanjay892000@gmail.com",
+                from: "mynotebook.gov.in@gmail.com",
                 to: emails,
-                subject: "myNoteBook reset password",
+                subject: "myNoteBook-Reset your password ",
                 html: `<!DOCTYPE html>
                 <html lang="en">
                     <head>
