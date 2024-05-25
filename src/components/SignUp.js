@@ -1,72 +1,102 @@
-import React, { useState } from 'react'
-import { useNavigate,Link} from 'react-router-dom';
-import { TextField, Button, InputAdornment, InputLabel, OutlinedInput, FormControl, IconButton} from '@mui/material';
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { TextField, Button, InputAdornment, InputLabel, OutlinedInput, FormControl, IconButton } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import avataars from "../images/avataaars.png";
-import {toast } from 'react-toastify';
-import '../styles/signup.css'
+import { toast } from 'react-toastify';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import '../styles/signup.css';
 import { BaseUrl } from '../Urls';
 
 const SignUp = (props) => {
   const navigate = useNavigate();
-  const [credintials, setcredintials] = useState({ name: "", email: "", password: "", repassword: "" });
-
-  const [showPassword, setShowPassword] = useState(false)
-  const [showrePassword, setShowrePassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [showrePassword, setShowrePassword] = useState(false);
 
   const handleClickShowPassword = () => {
-      setShowPassword(!showPassword)
+    setShowPassword(!showPassword);
   };
+
   const handleClickShowrePassword = () => {
-      setShowrePassword(!showrePassword)
+    setShowrePassword(!showrePassword);
   };
 
   const handleMouseDownPassword = (event) => {
-      event.preventDefault();
+    event.preventDefault();
   };
 
+  const validationSchema = Yup.object({
+    name: Yup.string().required('Required'),
+    email: Yup.string().email('Invalid email address').required('Required'),
+    password: Yup.string().min(8, 'Password must be at least 8 characters').required('Required'),
+    repassword: Yup.string().oneOf([Yup.ref('password'), null], 'Passwords must match').required('Required')
+  });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const response = await fetch(`${BaseUrl}/api/auth/createuser`, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ name: credintials.name, emails: credintials.email, password: credintials.password}),
-    });
-    const note = await response.json()
-    console.log(note);
-    if (note.success) {
-      /* localStorage.setItem('token', note.authtoken); */
-      toast.success('Your account has been successfully created');
-      setcredintials({name:"", email:"", password:"", repassword:"" })
-      navigate('/login');
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      repassword: ""
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      const response = await fetch(`${BaseUrl}/api/auth/createuser`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name: values.name, emails: values.email, password: values.password }),
+      });
+      const note = await response.json();
+      if (note.success) {
+        toast.success('Your account has been successfully created');
+        formik.resetForm();
+        navigate('/login');
+      } else {
+        toast.error('Invalid credentials');
+      }
     }
-    else {
-      toast.error('Invalid credentials');
-    }
-  }
-  const onChange = (e) => {
-    setcredintials({ ...credintials, [e.target.name]: e.target.value });
-  }
+  });
 
   return (
     <div>
-      <div className="d-flex full-page" >
+      <div className="d-flex full-page">
         <div className="col-md-5 right-page">
           <img className="img-fluid mt-5" src={avataars} alt="register" style={{ width: "100%", height: "100vh", objectFit: "cover" }} />
         </div>
         <div className="col-md-7 ps-5 pe-5 pt-1 left-page">
           <h2 style={{ fontWeight: "Bold" }}>Create a new account</h2>
           <p className="mb-4">Use your email to create a new account</p>
-          <form autoComplete="off" noValidate>
+          <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
             <div className="mb-4">
-              <TextField color="secondary" label="Name" name="name" value={credintials.name} variant="outlined" fullWidth onChange={onChange}/>
+              <TextField
+                color="secondary"
+                label="Name"
+                name="name"
+                variant="outlined"
+                fullWidth
+                onChange={formik.handleChange}
+                value={formik.values.name}
+                error={formik.touched.name && Boolean(formik.errors.name)}
+                helperText={formik.touched.name && formik.errors.name}
+              />
             </div>
             <div className="mb-4">
-              <TextField type="email" color="secondary" name="email" value={credintials.email} label="Email" variant="outlined" fullWidth onChange={onChange}/>
+              <TextField
+                type="email"
+                color="secondary"
+                name="email"
+                label="Email"
+                variant="outlined"
+                fullWidth
+                onChange={formik.handleChange}
+                value={formik.values.email}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+              />
             </div>
             <div className="mb-4">
               <FormControl variant="outlined" fullWidth>
@@ -75,8 +105,10 @@ const SignUp = (props) => {
                   id="outlined-adornment-password"
                   color="secondary"
                   name="password"
-                  value={credintials.password}
                   type={showPassword ? 'text' : 'password'}
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={formik.touched.password && Boolean(formik.errors.password)}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -89,7 +121,11 @@ const SignUp = (props) => {
                       </IconButton>
                     </InputAdornment>
                   }
-                  label="Password" onChange={onChange}/>
+                  label="Password"
+                />
+                {formik.touched.password && formik.errors.password && (
+                  <div style={{ color: 'red', marginTop: '5px' }}>{formik.errors.password}</div>
+                )}
               </FormControl>
             </div>
             <div className="mb-4">
@@ -97,10 +133,12 @@ const SignUp = (props) => {
                 <InputLabel color="secondary" htmlFor="outlined-adornment-password">Re-Password</InputLabel>
                 <OutlinedInput
                   id="outlined-adornment-password"
-                  name='repassword'
-                  value={credintials.repassword}
+                  name="repassword"
                   color="secondary"
                   type={showrePassword ? 'text' : 'password'}
+                  value={formik.values.repassword}
+                  onChange={formik.handleChange}
+                  error={formik.touched.repassword && Boolean(formik.errors.repassword)}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
@@ -113,16 +151,30 @@ const SignUp = (props) => {
                       </IconButton>
                     </InputAdornment>
                   }
-                  label="Re-Password" onChange={onChange}/>
+                  label="Re-Password"
+                />
+                {formik.touched.repassword && formik.errors.repassword && (
+                  <div style={{ color: 'red', marginTop: '5px' }}>{formik.errors.repassword}</div>
+                )}
               </FormControl>
             </div>
-           { credintials.name && credintials.email && credintials.password && credintials.password.length>=8 && credintials.password===credintials.repassword ? <Button className="register-button mb-4" type="submit" fullWidth size="large" variant="contained" color="secondary" style={{ textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.1rem" }} onClick={handleSubmit}>Register now</Button>:<Button className="register-button mb-4" type="submit" fullWidth size="large" variant="contained" color="secondary" style={{ textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.1rem" }} onClick={handleSubmit} disabled>Register now</Button>}
+            <Button
+              className="register-button mb-4"
+              type="submit"
+              fullWidth
+              size="large"
+              variant="contained"
+              color="secondary"
+              style={{ textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.1rem" }}
+            >
+              Register now
+            </Button>
           </form>
-          <p>If have an account? <Link to="/login" >LogIn</Link> </p>
+          <p>If you have an account? <Link to="/login">LogIn</Link> </p>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignUp
+export default SignUp;
