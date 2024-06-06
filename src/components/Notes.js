@@ -1,24 +1,19 @@
 import React, { useContext, useEffect, useState, useRef } from 'react'
 import NotesContext from '../mynotes/NotesContext';
 import NotesItem from './NotesItem';
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Button } from '@mui/material';
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 
 function Notes(props) {
     const context = useContext(NotesContext);
-    const { Notes, getNotes, editNotes } = context;
-    const navigate = useNavigate();
+    const { Notes, getNotes, editNotes} = context;
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
             getNotes();
-        }
-        else {
-            navigate("/login");
         }
         // eslint-disable-next-line
     })
@@ -80,16 +75,18 @@ function Notes(props) {
                 </div>
             </div>
             <div className="d-flex justify-content-start m-5">
-                <Button component={Link} to="/AddNotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Create Note</Button>
+                {localStorage.getItem('token') ? <Button component={Link} to="/AddNotes" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Create Note</Button> : <Button component={Link} to="/login" variant="contained" color="secondary" style={{ color: "White", textTransform: "none", fontFamily: "'Poppins', sans-serif", fontSize: "1.3rem" }}>Create Note</Button>}
             </div>
             <div className='row'>
+                <div className="filternotes d-flex justify-content-between align-items-center">
                 <h3>Your Notes</h3>
+                </div>
                 <div className="container my-3">
                     {Notes.length === 0 && 'No notes to display'}
                 </div>
                 {Notes.map((note) => {
                     return <>
-                        <NotesItem key={note.id} note={note} updateNotes={updateNotes}/>
+                        <NotesItem key={note.id} note={note} updateNotes={updateNotes} />
                     </>
                 })}
             </div>

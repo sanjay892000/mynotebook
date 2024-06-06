@@ -1,7 +1,9 @@
 .addnotes {
     width: 600px;
 }
-
+.welcome{
+    color: rgb(140, 29, 159);
+}
 @media(max-width: 600px){
     .addnotes {
         width: auto;
@@ -11,4 +13,5 @@
 
 .container-fluid{
     padding-right :10px;
+    
 }
