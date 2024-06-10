@@ -11,13 +11,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
+  border-radius: 5px;
 }
 
 .note-img{
   width: 35%;
 }
 .login {
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 @media (max-width: 1000px) {
