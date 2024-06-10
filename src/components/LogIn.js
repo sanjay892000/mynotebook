@@ -59,9 +59,9 @@ function LogIn(props) {
     };
 
     return (
-        <div className="full-page">
+        <div className="full-page mt-2">
             <div className="full-login">
-                <div className="container addnotes my-5">
+                <div className="container addnotes my-4">
                     <h2 style={{ fontWeight: "Bold", color:"rgb(140, 29, 159)" }}>Welcome to myNoteBook</h2>
                 </div>
                 <form autoComplete="off" noValidate className='container main-form' onSubmit={formik.handleSubmit}>

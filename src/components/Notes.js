@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 
 function Notes(props) {
     const context = useContext(NotesContext);
-    const { Notes, getNotes, editNotes} = context;
+    const { Notes, getNotes, editNotes } = context;
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -79,15 +79,15 @@ function Notes(props) {
             </div>
             <div className='row'>
                 <div className="filternotes d-flex justify-content-between align-items-center">
-                <h3>Your Notes</h3>
+                    <h3>Your Notes</h3>
                 </div>
                 <div className="container my-3">
                     {Notes.length === 0 && 'No notes to display'}
                 </div>
-                {Notes.map((note) => {
-                    return <>
-                        <NotesItem key={note.id} note={note} updateNotes={updateNotes} />
-                    </>
+                {Notes.map((note, id) => {
+                    return <div key={id}>
+                        <NotesItem note={note} updateNotes={updateNotes} />
+                    </div>
                 })}
             </div>
         </>

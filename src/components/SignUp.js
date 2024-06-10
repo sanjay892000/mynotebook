@@ -63,11 +63,11 @@ const SignUp = (props) => {
 
   return (
     <div>
-      <div className="d-flex full-page">
+      <div className="d-flex full-page mt-4">
         <div className="col-md-5 right-page">
-          <img className="img-fluid mt-5" src={avataars} alt="register" style={{ width: "100%", height: "100vh", objectFit: "cover" }} />
+          <img className="img-fluid" src={avataars} alt="register" style={{ width: "100%", height: "85vh", objectFit: "cover" }} />
         </div>
-        <div className="col-md-7 ps-5 pe-5 pt-1 left-page">
+        <div className="col-md-7 ps-5 pe-5 left-page">
           <h2 style={{ fontWeight: "Bold", color:"rgb(140, 29, 159)" }}>Create a new account</h2>
           <p className="mb-4">Use your email to create a new account</p>
           <form autoComplete="off" noValidate onSubmit={formik.handleSubmit}>
