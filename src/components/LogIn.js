@@ -10,11 +10,12 @@ import { toast } from 'react-toastify';
 import { BaseUrl } from '../Urls';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useTheme } from '@mui/material/styles';
 
 function LogIn(props) {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
-
+    const theme = useTheme();
     const loginwithgoogle = () => {
         window.open("http://localhost:5000/api/auth/google/callback", "_self");
     }
@@ -129,7 +130,7 @@ function LogIn(props) {
                     <hr />
                 </form>
                 <div className="container addnotes">
-                    <p className="mb-4 borderor">OR</p>
+                    <p className="mb-4 borderor" style={{backgroundColor: theme.palette.background.default, color:theme.palette.text.main}}>OR</p>
                     <div className="d-flex loginbutton">
                         <Button
                             size="large"
