@@ -30,7 +30,7 @@ function App() {
         paper: mode === 'dark' ? '#1d1d1d' : '#DBE9FE',
       },
       primary: {
-        main: mode === 'dark' ? '#90caf9' : '#1976d2',
+        main: mode === 'dark' ? '#1976d2' : '#1976d2',
       },
       secondary: {
         main: mode === 'dark' ? '#9C27B0' : '#9C27B0',

@@ -129,7 +129,7 @@ function LogIn(props) {
                     <hr />
                 </form>
                 <div className="container addnotes">
-                    <p className="mb-4 border">OR</p>
+                    <p className="mb-4 borderor">OR</p>
                     <div className="d-flex loginbutton">
                         <Button
                             size="large"

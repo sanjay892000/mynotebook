@@ -22,13 +22,12 @@
 .main-form{
     width: 42vw;
 }
-.border{
+.borderor{
     display: flex;
     position: absolute;
-    top: -30px;
-    background-color: rgb(219,233,254);
+    top: -28px;
     padding:0px 10px;
-    border: none;
+    outline: none;
 }
 
 
