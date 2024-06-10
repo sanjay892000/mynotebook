@@ -84,10 +84,10 @@ function Notes(props) {
                 <div className="container my-3">
                     {Notes.length === 0 && 'No notes to display'}
                 </div>
-                {Notes.map((note, id) => {
-                    return <div key={id}>
-                        <NotesItem note={note} updateNotes={updateNotes} />
-                    </div>
+                {Notes.map((note) => {
+                    return <>
+                        <NotesItem key={note.id} note={note} updateNotes={updateNotes} />
+                    </>
                 })}
             </div>
         </>
