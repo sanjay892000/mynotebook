@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 
 
 function Notes(props) {
+    const {darkMode} = props;
     const context = useContext(NotesContext);
     const { Notes, getNotes, editNotes } = context;
 
@@ -86,7 +87,7 @@ function Notes(props) {
                 </div>
                 {Notes.map((note) => {
                     return <>
-                        <NotesItem key={note.id} note={note} updateNotes={updateNotes} />
+                        <NotesItem key={note.id} darkMode={darkMode} note={note} updateNotes={updateNotes} />
                     </>
                 })}
             </div>

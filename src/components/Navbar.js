@@ -18,12 +18,13 @@ import {toast } from 'react-toastify';
 import '../styles/userdetails.css'
 import usericon from '../images/usericon.png'
 import { BaseUrl } from '../Urls';
+import { useTheme } from '@mui/material/styles';
 
 
-function NavBar() {
+function NavBar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [darkMode, setDarkMode] = React.useState(false);
-
+  const {darkMode, setDarkMode} = props;
+  const theme = useTheme();
   const [user, setUser] = React.useState([]);
   const navigate = useNavigate();
   const handleLogOut = () => {
@@ -69,6 +70,7 @@ function NavBar() {
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
+      style={{backgroundColor: theme.palette.notesElement.main, color:theme.palette.text.main}}
     >
       <div className='user-icon'><img src={usericon} alt="loading.." /></div>
       <div className="user-name" name='username' >{user.name}</div>

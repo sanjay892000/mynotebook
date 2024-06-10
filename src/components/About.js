@@ -5,13 +5,14 @@ import login from '../images/about - awesome.svg'
 import { Link } from "react-router-dom";
 import { Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useTheme } from '@mui/material/styles';
 
 
-export default function About() {
-
+export default function About(props) {
+    const theme = useTheme();
     return (
         <div>
-            <Button className="mb-4" variant="text" color="secondary" startIcon={<ArrowBackIcon />} component={Link} to="/" style={{ textTransform: "none", fontFamily: "'Poppins', sans-serif" }}>Home</Button>
+            <Button className="my-3" variant="text" color="secondary" startIcon={<ArrowBackIcon />} component={Link} to="/" style={{ textTransform: "none", fontFamily: "'Poppins', sans-serif" }}>Home</Button>
             <div className="text-white aboutImg text-center">
                 <div className="note-img">
                     <h1 className="display-4">Empowering  Students</h1>
@@ -35,7 +36,7 @@ export default function About() {
                     </div>
                 </div>
 
-                <div className="row login mt-5 mb-5 p-5">
+                <div className="row login mt-5 mb-5 p-5" style={{backgroundColor: theme.palette.notesElement.main, color:theme.palette.text.main}}>
                     <div className="col-md-6">
                         <img className="img-fluid" src={login} alt="about-awesome" />
                     </div>
