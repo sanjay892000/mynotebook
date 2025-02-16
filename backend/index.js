@@ -1,12 +1,10 @@
 const express = require('express');
 const connectToDatabase = require('./database');
 require('dotenv').config();
-/* const session = require("express-session");
-const passport = require("passport"); */
 const cors = require('cors');
-const port = process.env.PORT_BACK || 5000
 const app = express()
 
+const port = process.env.PORT_BACK || 5000
 /* const allowedOrigins = ['https://mynotebook-two.vercel.app', 'http://localhost:3000']; */
 app.use(cors({
   origin:'*',
