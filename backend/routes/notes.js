@@ -14,7 +14,10 @@ router.post('/addnotes', fetchallnotes, upload.single("image"), [
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() })
+        return res.status(400).json({ 
+            success: false,
+            message: errors.array()
+         })
     }
     try {
        
@@ -30,9 +33,16 @@ router.post('/addnotes', fetchallnotes, upload.single("image"), [
             user: req.user.id
         });
         const saveNotes = await notes.save();
-        res.json(saveNotes);
+        res.status(200).json({
+            success: true,
+            message: "Notes added successfully",
+            notes: saveNotes
+        });
     } catch (error) {
-      console.log(error)
+        res.status(500).send({
+            success: false,
+            message: "Internal server error"
+        });
     }
 })
 
@@ -40,10 +50,16 @@ router.post('/addnotes', fetchallnotes, upload.single("image"), [
 router.get('/getnotes', fetchallnotes, async (req, res) => {
     try {
         const notes = await NotesSchema.find({ user: req.user.id });
-        res.json(notes);
+        res.status(200).json({
+            success: true,
+            message: "all notes fetched successfully",
+            notes: notes
+        });
     } catch (error) {
-        console.log(error.massage);
-        return res.status(400).send("there are server error")
+        return res.status(500).send({
+            success: false,
+            message: "Internal server error"
+        })
     }
 })
 
@@ -56,18 +72,22 @@ router.put('/updatenotes/:id', fetchallnotes, async (req, res) => {
     if (tag) { newNotes.tag = tag; };
 
     let notes = await NotesSchema.findById(req.params.id);
-    if (!notes) {
-        return res.status(404).send("NOT FOUND");
-    }
+
     if (notes.user.toString() !== req.user.id) {
         return res.status(401).send("NOT ALLOWED");
     }
     try {
         notes = await NotesSchema.findByIdAndUpdate(req.params.id, { $set: newNotes }, { new: true });
-        res.json(notes);
+        res.status(200).json({
+            success: true,
+            message: "Notes updated successfully",
+            notes: notes
+        });
     } catch (error) {
-        console.log(error.massage);
-        return res.status(400).send("there are server error")
+        return res.status(500).send({
+            success: false,
+            message: "there are server error"
+        })
     }
 })
 
@@ -75,19 +95,22 @@ router.put('/updatenotes/:id', fetchallnotes, async (req, res) => {
 router.delete('/deletenotes/:id', fetchallnotes, async (req, res) => {
 
     let notes = await NotesSchema.findById(req.params.id);
-    if (!notes) {
-        return res.status(404).send("NOT FOUND");
-    }
+
     if (notes.user.toString() !== req.user.id) {
         return res.status(401).send("NOT ALLOWED");
     }
     try {
         notes = await NotesSchema.findByIdAndDelete(req.params.id);
-        res.json({ "success": "this notes hasbeen deleted", notes: notes });
-        console.log(notes + "\nthis id:- " + req.params.id + " is deleted");
+        res.status(200).json({
+            success: true,
+            message: "Notes deleted successfully",
+            notes: notes
+        });
     } catch (error) {
-        console.log(error.massage);
-        return res.status(400).send("there are server error")
+        return res.status(500).send({
+            success: false,
+            message: "there are server error"
+        })
     }
 })
 

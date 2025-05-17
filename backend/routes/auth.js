@@ -33,33 +33,30 @@ router.post('/createuser', [
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() }); //400 is bad request
+        return res.status(400).json({
+            success: false,
+            message: errors.array()
+        }); //400 is bad request
     }
     try {
         let user = await User.findOne({ emails: req.body.emails });
         if (user) {
-            const success = false;
-            return res.status(400).json({ success, errors: "sorry this user already exist with this emails" });
+            return res.status(400).json({ success: false, errors: "sorry this user already exist with this emails" });
         }
         const salt = await bcrypt.genSalt(10); //return promise so use await ,
         const secpassword = await bcrypt.hash(req.body.password, salt); // use await bcs it return promise
         user = await User.create({
             name: req.body.name,
             emails: req.body.emails,
-            /* contact: req.body.contact, */
             password: secpassword
         })
-        const data = {
-            user: {
-                id: user.id
-            }
-        }
-        const auth_token = jwt.sign(data, JWT_SECRET);
-        const success = true;
-        res.json({ success, auth_token });
+        res.json({ success: true, message: "account created successfully" });
     } catch (error) {
         console.log(error.massage);
-        res.status(500).send("Interna; server error");
+        res.status(500).send({
+            success: false,
+            message: "Intrnal server error"
+        });
     }
 
 })
@@ -70,7 +67,10 @@ router.post('/loginuser', [
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() }); //400 is bad request
+        return res.status(400).json({
+            success: false,
+            message: errors.array()
+        }); //400 is bad request
     }
 
     const { emails, password } = req.body;
@@ -78,14 +78,15 @@ router.post('/loginuser', [
         let user = await User.findOne({ emails });
         console.log(user);
         if (!user) {
-            const success = false;
-            return res.status(400).json({ success, error: "Please try to login with correct credentials" });
+            return res.status(400).json({
+                success: false,
+                message: "invalid email or password"  //400 is bad request
+            });
         }
         const compPassword = await bcrypt.compare(password, user.password);
         console.log(compPassword);
         if (!compPassword) {
-            const success = false;
-            return res.status(400).json({ success, error: "Please try to login with correct credentials" })
+            return res.status(400).json({ success: false, message: "invalid email or password" })
         }
         const data = {
             user: {
@@ -93,11 +94,17 @@ router.post('/loginuser', [
             }
         }
         const auth_token = jwt.sign(data, JWT_SECRET);
-        const success = true;
-        res.json({ success, auth_token });
+        res.json({
+            success: true,
+            auth_token,
+            message: "login successfully"
+        });
     } catch (error) {
         console.log(error.massage);
-        return res.status(500).send("Intrnal server error");
+        return res.status(500).send({
+            success: false,
+            message: "Intrnal server error"
+        });
     }
 })
 
@@ -106,12 +113,18 @@ router.post('/fetchuser', fetchdata, async (req, res) => {
     try {
         const user_id = req.user.id;
         const user = await User.findById(user_id).select("-password");
-        res.send(user);
+        res.status(200).send({
+            success: true,
+            message: "user details",
+            user
+        });
     } catch (error) {
         console.log(error.massage);
-        return res.status(500).send("Intrnal server error2");
+        return res.status(500).send({
+            success: false,
+            message: "Intrnal server error"
+        });
     }
-
 });
 
 
@@ -125,11 +138,17 @@ router.post('/forgot-password', [body('emails', 'enter a valid emails').isEmail(
         }
     });
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() }); //400 is bad request
+        return res.status(400).json({
+            success: false,
+            message: errors.array()
+        }); //400 is bad request
     }
     const { emails } = req.body;
     if (!emails) {
-        return res.status(400).json({ massage: "enter your email" });
+        return res.status(400).json({
+            success: false,
+            message: "please enter your email"
+        });
     }
     try {
 
@@ -235,15 +254,20 @@ router.post('/forgot-password', [body('emails', 'enter a valid emails').isEmail(
                     return res.status(201).send("message send");
                 }
             });
-            const success = true;
-            res.json({ success, message: "message send" });
+            res.json({
+                success: true,
+                message: "message send successfully",
+            });
         }
         else {
             console.log("massage not send")
         }
     }
     catch (error) {
-        return res.status(500).send("Intrnal server error2");
+        return res.status(500).send({
+            success: false,
+            message: "Intrnal server error"
+        });
     }
 
 })
@@ -252,11 +276,27 @@ router.get('/new-password/:id/:auth_token', async (req, res) => {
     const { id, auth_token } = req.params;
     try {
         const user = await User.findOne({ _id: id });
+        if (!user) {
+            return res.status(404).send({
+                success: false, message: "User not found"
+            });
+        }
         const token = jwt.verify(auth_token, JWT_SECRET)
-        res.send(user, token);
+        if (!token) {
+            return res.status(401).send({ success: false, message: "something went wrong! try again" });
+        }
+        res.send({
+            success: true,
+            message: "user found",
+            user_id: id,
+            auth_token: auth_token
+        });
     } catch (error) {
         console.log(error.massage);
-        return res.status(500).send("Intrnal server error2");
+        return res.status(500).send({
+            success: false,
+            message: "Intrnal server error"
+        });
     }
 
 });
@@ -266,25 +306,32 @@ router.post('/update-password/:id/:auth_token', [body('password', 'enter passwor
     const { password } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() }); //400 is bad request
+        return res.status(400).json({
+            success: false,
+            message: errors.array()
+        }); //400 is bad request
     }
     try {
         const salt = await bcrypt.genSalt(10); //return promise so use await ,
         const secpassword = await bcrypt.hash(password, salt);
         // use await bcs it return promise
-        const setPassword = await User.findByIdAndUpdate({ _id: id }, { password: secpassword });
-        setPassword.save();
+        await User.findByIdAndUpdate({ _id: id }, { password: secpassword });
         const data = {
             user: {
                 id: id
             }
         }
         const auth_token = jwt.sign(data, JWT_SECRET);
-        const success = true;
-        res.json({ success, auth_token });
+        res.json({
+            success: true,
+            auth_token,
+            message: "password updated successfully"
+        });
     } catch (error) {
-        console.log(error.massage);
-        res.status(500).send("Interna; server error");
+        res.status(500).send({
+            success: false,
+            message: "Intrnal server error"
+        });
     }
 
 })
