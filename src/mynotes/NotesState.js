@@ -32,20 +32,6 @@ export default function NotesState(props) {
     if (image) {
       formData.append('image', image, image.name)
     };
-    //API call to add data into database
-    /* const response = await fetch(`${BaseUrl}/api/notes/addnotes`, {
-      method: "POST",
-     
-      // GET, POST, PUT, DELETE, etc.
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": localStorage.getItem('token')
-      },
-      body: JSON.stringify({ title, description, tag, type, image }),
-    });
-    const note = await response.json()
-    setNotes(Notes.concat(note)) */
-
     await axios.post(`${BaseUrl}/api/notes/addnotes`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
@@ -54,11 +40,11 @@ export default function NotesState(props) {
     })
       .then((res) => {
         const note = res.data;
-        setNotes(Notes.concat(note))
+        setNotes([...Notes, note])
         toast.success('Your note has been added');
       })
       .catch((err) => {
-        toast.error('Title must be unique')
+        console.log(err);
       })
 
   }

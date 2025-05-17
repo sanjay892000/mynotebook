@@ -7,23 +7,17 @@ require('../styles/noteitems.css');
 
 function NotesItem(props) {
     const { note, updateNotes } = props;
-    const context = useContext(NotesContext);
+    const { deleteNotes } = useContext(NotesContext);
     const theme = useTheme();
-    const { deleteNotes } = context;
-    const title = note.title
-    const ftitle = title.charAt(0);
-    const uptitle = ftitle.toUpperCase();
+    const { title, description, tag, type} = note;
+    const ftitle = title.at(0).toUpperCase();
     const remtitle = title.slice(1)
-    const titlename = uptitle + remtitle;
-    const dec= note.description;
-    const firstdec = dec.charAt(0)
-    const uprcsedec = firstdec.toUpperCase();
-    const remdec = dec.slice(1);
-    const allDescription = uprcsedec + remdec;
-    const tagtext = note.tag
-    const removespace = tagtext.replaceAll(" ","");
-    const tagname = removespace.toLowerCase();
-    const notetype = note.type ? "public": "private";
+    const titlename = ftitle + remtitle;
+    const firstdec = description.charAt(0).toUpperCase()
+    const remdec = description.slice(1);
+    const allDescription =firstdec + remdec;
+    const tagname = tag.replaceAll(" ","").toLowerCase();
+    const notetype = type ? "public": "private";
 
     return (
         <>

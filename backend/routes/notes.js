@@ -14,25 +14,24 @@ router.post('/addnotes', fetchallnotes, upload.single("image"), [
 ], async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).json({ 
+        return res.status(400).json({
             success: false,
             message: errors.array()
-         })
+        })
     }
     try {
-       
+
         const image = req.file ? req.file.filename : null;
         const { title, description, tag, type } = req.body;
         const parsedType = type ? JSON.parse(type) : false;
-        const notes = new NotesSchema({
+        const saveNotes = await NotesSchema.create({
             title,
             description,
             tag,
             image,
-            type:parsedType,
+            type: parsedType,
             user: req.user.id
         });
-        const saveNotes = await notes.save();
         res.status(200).json({
             success: true,
             message: "Notes added successfully",
