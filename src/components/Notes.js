@@ -15,8 +15,7 @@ function Notes(props) {
         if (localStorage.getItem('token')) {
             getNotes();
         }
-        console.log(Notes)
-    })
+    },[getNotes])
     const ref = useRef(null)
     const refClose = useRef(null)
     const [updatenote, setupdateNotes] = useState({ id: "", etitle: "", edescription: "", etag: "" })
