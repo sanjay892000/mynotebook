@@ -204,7 +204,7 @@ router.post('/forgot-password', [body('emails', 'enter a valid emails').isEmail(
                                     <h4>Make something <span class="awesome">Awesome</span></h4>
                                     <p style="color: red;">This is valid only for 5 minutes</p>
                                     <a
-                                        href="https://mynotebook-crtdby-sanjay.netlify.app/new-password/${user.id}/${auth_token}"
+                                        href="https://mynoteb00kapp.netlify.app/new-password/${user.id}/${auth_token}"
                                         class="button">Reset password</a>
                                 </div>
                             </div>

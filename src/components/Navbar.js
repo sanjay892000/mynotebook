@@ -14,7 +14,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import Drawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import '../styles/userdetails.css'
 import usericon from '../images/usericon.png'
 import { BaseUrl } from '../Urls';
@@ -23,7 +23,7 @@ import { useTheme } from '@mui/material/styles';
 
 function NavBar(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const {darkMode, setDarkMode} = props;
+  const { darkMode, setDarkMode } = props;
   const theme = useTheme();
   const [user, setUser] = React.useState([]);
   const navigate = useNavigate();
@@ -33,9 +33,7 @@ function NavBar(props) {
     navigate('/login');
   }
   let location = useLocation();
-  React.useEffect(() => {
-    console.log(location.pathname, location.key);
-  }, [location])
+
 
   // for fetch user
 
@@ -61,7 +59,6 @@ function NavBar(props) {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
 
@@ -70,7 +67,7 @@ function NavBar(props) {
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
-      style={{backgroundColor: theme.palette.notesElement.main, color:theme.palette.text.main}}
+      style={{ backgroundColor: theme.palette.notesElement.main, color: theme.palette.text.main }}
     >
       <div className='user-icon'><img src={usericon} alt="loading.." /></div>
       <div className="user-name" name='username' >{user.name}</div>
@@ -92,10 +89,10 @@ function NavBar(props) {
     setDarkMode(!darkMode);
   };
   return (
-    <AppBar position="sticky" style={{backgroundColor:'rgb(12, 12, 12, 0.9)'}}>
+    <AppBar position="sticky" style={{ backgroundColor: 'rgb(12, 12, 12, 0.9)' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <RouterLink id='navbar-brand' className="navbar-brand" component={RouterLink} to="/"><img className='mx-1 cursor-pointer' src={logo} alt="Loading...." style={{ width: "40px", Height: "40px" }}/>myNoteBook</RouterLink>
+          <RouterLink id='navbar-brand' className="navbar-brand" component={RouterLink} to="/"><img className='mx-1 cursor-pointer' src={logo} alt="Loading...." style={{ width: "40px", Height: "40px" }} />myNoteBook</RouterLink>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -105,7 +102,7 @@ function NavBar(props) {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <RouterLink id='menubarhome' className="navbar-brand mr-3"><img className='mx-1 cursor-pointer' src={logo} alt="Loading...." style={{ width: "40px", Height: "40px" }}/>myNoteBook</RouterLink>
+              <RouterLink id='menubarhome' className="navbar-brand mr-3"><img className='mx-1 cursor-pointer' src={logo} alt="Loading...." style={{ width: "40px", Height: "40px" }} />myNoteBook</RouterLink>
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -174,8 +171,8 @@ function NavBar(props) {
                 </React.Fragment>
               ))}</div> : <form className="d-flex" role="search">
                 <Button color="inherit" component={RouterLink} to="/login">
-              Login
-            </Button>
+                  Login
+                </Button>
               </form>}
           </Box>
         </Toolbar>

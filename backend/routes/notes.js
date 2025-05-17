@@ -45,7 +45,6 @@ router.get('/getnotes', fetchallnotes, async (req, res) => {
         console.log(error.massage);
         return res.status(400).send("there are server error")
     }
-
 })
 
 //Route 3: Update notes using: PUT 'api/notes/updatenotes' login required

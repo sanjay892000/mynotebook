@@ -14,18 +14,8 @@ app.use(cors({
 }))
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-/* // setup session
-app.use(session({
-  secret: process.env.SECRET,
-  resave: false,
-  saveUninitialized: true
-}))
-
-// setuppassport
-app.use(passport.initialize());
-app.use(passport.session());
- */
 //call the database through client()
 connectToDatabase();
 
@@ -38,10 +28,7 @@ app.get('/', (req, res) => {
 });
 
 app.use(express.static("uploads"))
-app.use(express.static("Images"))
 
-app.use('/api/auth', require('./routes/googleLoginRouter'));
-app.use('/api/image', require("./routes/image"));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));
 app.listen(port, () => {
