@@ -8,15 +8,14 @@ import { toast } from 'react-toastify';
 
 
 function Notes(props) {
-    const {darkMode} = props;
+    const { darkMode } = props;
     const context = useContext(NotesContext);
     const { Notes, getNotes, editNotes } = context;
-
     useEffect(() => {
         if (localStorage.getItem('token')) {
             getNotes();
         }
-        // eslint-disable-next-line
+        console.log(Notes)
     })
     const ref = useRef(null)
     const refClose = useRef(null)
@@ -85,11 +84,7 @@ function Notes(props) {
                 <div className="container my-3">
                     {Notes.length === 0 && 'No notes to display'}
                 </div>
-                {Notes.map((note) => {
-                    return <>
-                        <NotesItem key={note.id} darkMode={darkMode} note={note} updateNotes={updateNotes} />
-                    </>
-                })}
+                {Notes.length > 0 && Notes.map((note) => <NotesItem key={note.id} darkMode={darkMode} note={note} updateNotes={updateNotes} />)}
             </div>
         </>
     )
