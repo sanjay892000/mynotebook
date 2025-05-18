@@ -19,7 +19,7 @@ export default function NotesState(props) {
       },
     });
     const fetchNotes = await response.json();
-    setNotes(fetchNotes);
+    setNotes(fetchNotes.notes);
   }
 
   //Add Notes
@@ -40,7 +40,8 @@ export default function NotesState(props) {
     })
       .then((res) => {
         const note = res.data;
-        setNotes([...Notes, note])
+        console.log(note)
+        setNotes([...Notes, note.notes])
         toast.success('Your note has been added');
       })
       .catch((err) => {
@@ -56,8 +57,6 @@ export default function NotesState(props) {
       headers: {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem('token')
-        /* "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwMzEzZTMyY2JmOWQ4ODFlNTMzNmExIn0sImlhdCI6MTY5NDcwMDYyMX0._7zsjnlY9wNnD7Uam_l0W3NiI9yBMYQ6vTbwtjzC-jI" */
-
       }
     });
     const json = await response.json();
@@ -74,15 +73,12 @@ export default function NotesState(props) {
       headers: {
         "Content-Type": "application/json",
         "auth-token": localStorage.getItem('token')
-        /* "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwMzEzZTMyY2JmOWQ4ODFlNTMzNmExIn0sImlhdCI6MTY5NDcwMDYyMX0._7zsjnlY9wNnD7Uam_l0W3NiI9yBMYQ6vTbwtjzC-jI" */
-
       },
       body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
     });
     const json = await response.json();
     console.log(json)
     let newNotes = JSON.parse(JSON.stringify(Notes))
-
     for (let index = 0; index < newNotes.length; index++) {
       const note = newNotes[index];
       if (note._id === id) {
