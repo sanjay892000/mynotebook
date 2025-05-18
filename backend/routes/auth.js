@@ -111,8 +111,9 @@ router.post('/loginuser', [
 //route:3 get logedin user details using: post "api/auth/fetchdata" login required
 router.post('/fetchuser', fetchdata, async (req, res) => {
     try {
-        const user_id = req.user.id;
-        const user = await User.findById(user_id).select("-password");
+        console.log(req.user.id)
+        const user = await User.findById(req.user.id).select("-password");
+        console.log(user)
         res.status(200).send({
             success: true,
             message: "user details",

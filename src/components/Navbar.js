@@ -47,7 +47,8 @@ function NavBar(props) {
       }
     });
     const json = await response.json();
-    setUser(json);
+    console.log(json.user)
+    setUser(json.user);
   }
 
   //for drawer
