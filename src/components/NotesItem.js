@@ -40,7 +40,7 @@ function NotesItem(props) {
                             <div className='notescomponent'>
                                 <p className="card-text">{allDescription}</p>
                                 {(tagname) ? <p><spam className="card-text notetag">#{tagname}</spam></p> : ''}
-                                {note.image ? <img src={`${BaseUrl}/${note.image}`} alt="loading..." /> : ''}
+                                {note.image ? <img src={`${note.image}`} alt="loading..." /> : ''}
                                 <p className="card-text font-size-sm mt-3 notedate">{date1.toLocaleString()}</p>
                             </div>
                         </div>
