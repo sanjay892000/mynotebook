@@ -2,8 +2,10 @@ const express = require('express');
 const connectToDatabase = require('./database');
 require('dotenv').config();
 const cors = require('cors');
-const app = express()
 
+const cloudinary = require('./utils/cloudinaryConfig');
+
+const app = express()
 const port = process.env.PORT || 5000
 /* const allowedOrigins = ['https://mynotebook-two.vercel.app', 'http://localhost:3000']; */
 app.use(cors({
@@ -12,7 +14,7 @@ app.use(cors({
   headers: "Content-Type, auth-token",
   credentials: true
 }))
-
+console.log(cloudinary.config());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

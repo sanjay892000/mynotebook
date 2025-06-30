@@ -15,7 +15,7 @@ function Notes(props) {
         if (localStorage.getItem('token')) {
             getNotes();
         }
-    },[getNotes])
+    },[])
     const ref = useRef(null)
     const refClose = useRef(null)
     const [updatenote, setupdateNotes] = useState({ id: "", etitle: "", edescription: "", etag: "" })
@@ -83,7 +83,7 @@ function Notes(props) {
                 <div className="container my-3">
                     {Notes.length === 0 && 'No notes to display'}
                 </div>
-                {Notes.length > 0 && Notes.map((note) => <NotesItem key={note.id} darkMode={darkMode} note={note} updateNotes={updateNotes} />)}
+                {Notes.length > 0 && Notes.map((note) => <NotesItem key={note.id} public={note.type} darkMode={darkMode} note={note} updateNotes={updateNotes} />)}
             </div>
         </>
     )

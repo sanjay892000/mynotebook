@@ -130,6 +130,11 @@ function NavBar(props) {
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center"><Button color="inherit" component={RouterLink} to="/about" className={location.pathname === "/about" ? "active" : ""}>
+                  Public Notes
+                </Button></Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Typography textAlign="center"><Button color="inherit" component={RouterLink} to="/about" className={location.pathname === "/about" ? "active" : ""}>
                   About
                 </Button></Typography>
               </MenuItem>
@@ -144,6 +149,9 @@ function NavBar(props) {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             <Button color="inherit" component={RouterLink} to="/" className={location.pathname === "/" ? "active" : ""}>
               Home
+            </Button>
+            <Button color="inherit" component={RouterLink} to="/public" className={location.pathname === "/public" ? "active" : ""}>
+              PubNotes
             </Button>
             <Button color="inherit" component={RouterLink} to="/about" className={location.pathname === "/about" ? "active" : ""}>
               About

@@ -6,6 +6,7 @@ const fetchallnotes = require('../middleware/fetchdata');
 // import the express validator to enter the valid value by the user
 const { body, validationResult } = require('express-validator');
 const upload = require('../middleware/multer');
+const uploadOnCloudinary = require('../utils/cloudinary');
 
 //Router 1: Add notes notes using: POST 'api/notes/addnotes' login required
 router.post('/addnotes', fetchallnotes, upload.single("image"), [
@@ -21,9 +22,16 @@ router.post('/addnotes', fetchallnotes, upload.single("image"), [
     }
     try {
 
-        const image = req.file ? req.file.filename : null;
+        const localPath = req.file ? req.file.path : null;
         const { title, description, tag, type } = req.body;
         const parsedType = type ? JSON.parse(type) : false;
+        const image = await uploadOnCloudinary(localPath)
+        if (!image) {
+            return res.status(400).json({
+                success: false,
+                message: errors.array()
+            })
+        }
         const saveNotes = await NotesSchema.create({
             title,
             description,
