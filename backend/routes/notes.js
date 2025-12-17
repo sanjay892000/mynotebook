@@ -9,7 +9,7 @@ const upload = require('../middleware/multer');
 const uploadOnCloudinary = require('../utils/cloudinary');
 
 //Router 1: Add notes notes using: POST 'api/notes/addnotes' login required
-router.post('/addnotes', fetchallnotes, upload.single("image"), [
+router.post('/addnotes', fetchallnotes, upload.array("image"), [
     body('title', 'Please provide a valid title (Your title should not be greater than 100 characters)').isLength({ max: 100 }),
     body('description', 'Please enter a Description').isLength({ max: 1000 })
 ], async (req, res) => {
@@ -20,37 +20,51 @@ router.post('/addnotes', fetchallnotes, upload.single("image"), [
             message: errors.array()
         })
     }
-    try {
-
-        const localPath = req.file ? req.file.path : null;
-        const { title, description, tag, type } = req.body;
-        const parsedType = type ? JSON.parse(type) : false;
-        const image = await uploadOnCloudinary(localPath)
-        if (!image) {
-            return res.status(400).json({
-                success: false,
-                message: errors.array()
-            })
-        }
-        const saveNotes = await NotesSchema.create({
-            title,
-            description,
-            tag,
-            image,
-            type: parsedType,
-            user: req.user.id
-        });
-        res.status(200).json({
-            success: true,
-            message: "Notes added successfully",
-            notes: saveNotes
-        });
-    } catch (error) {
-        res.status(500).send({
+    // Check if files are uploaded
+    if (!req.files || req.files.length === 0) {
+        return res.status(400).json({
             success: false,
-            message: "Internal server error"
+            message: 'Please upload at least one image'
         });
     }
+    console.log("Uploaded files:", req.files);
+
+
+    res.status(200).json({
+        success: true,
+        message: "Notes added successfully"
+    });
+    /*  try {
+ 
+         const localPath = req.file ? req.file.path : null;
+         const { title, description, tag, type } = req.body;
+         const parsedType = type ? JSON.parse(type) : false;
+         const image = await uploadOnCloudinary(localPath)
+         if (!image) {
+             return res.status(400).json({
+                 success: false,
+                 message: errors.array()
+             })
+         }
+         const saveNotes = await NotesSchema.create({
+             title,
+             description,
+             tag,
+             image,
+             type: parsedType,
+             user: req.user.id
+         });
+         res.status(200).json({
+             success: true,
+             message: "Notes added successfully",
+             notes: saveNotes
+         });
+     } catch (error) {
+         res.status(500).send({
+             success: false,
+             message: "Internal server error"
+         });
+     } */
 })
 
 //Router 2: Get all notes using: GET 'api/notes/getnates' login required

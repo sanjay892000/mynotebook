@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import NotesContext from '../mynotes/NotesContext';
-import { BaseUrl } from '../Urls'
 import { useTheme } from '@mui/material/styles';
 require('../styles/noteitems.css');
 
