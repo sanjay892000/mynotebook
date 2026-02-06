@@ -16,9 +16,6 @@ function LogIn(props) {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const theme = useTheme();
-    const loginwithgoogle = () => {
-        window.open("http://localhost:5000/api/auth/google/callback", "_self");
-    }
 
     const validationSchema = Yup.object({
         email: Yup.string().email('Invalid email address').required('Required'),
@@ -63,7 +60,7 @@ function LogIn(props) {
         <div className="full-page mt-2">
             <div className="full-login">
                 <div className="container addnotes my-4">
-                    <h2 style={{ fontWeight: "Bold", color:"rgb(140, 29, 159)" }}>Welcome to myNoteBook</h2>
+                    <h2 style={{ fontWeight: "Bold", color: "rgb(140, 29, 159)" }}>Welcome to myNoteBook</h2>
                 </div>
                 <form autoComplete="off" noValidate className='container main-form' onSubmit={formik.handleSubmit}>
                     <div className="inputform">
@@ -130,7 +127,7 @@ function LogIn(props) {
                     <hr />
                 </form>
                 <div className="container addnotes">
-                    <p className="mb-4 borderor" style={{backgroundColor: theme.palette.background.default, color:theme.palette.text.main}}>OR</p>
+                    <p className="mb-4 borderor" style={{ backgroundColor: theme.palette.background.default, color: theme.palette.text.main }}>OR</p>
                     <div className="d-flex loginbutton">
                         <Button
                             size="large"
@@ -140,7 +137,6 @@ function LogIn(props) {
                             color="error"
                             startIcon={<GoogleIcon />}
                             style={{ textTransform: "none", fontSize: "1.1rem", color: "White", fontFamily: "'Poppins', sans-serif" }}
-                            onClick={loginwithgoogle}
                         >
                             Login with Google
                         </Button>
